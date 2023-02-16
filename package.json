@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/FRAGG33R/Todo-list#readme",
   "dependencies": {
+    "@prisma/client": "^4.10.1",
     "@types/node": "^18.13.0",
     "prisma": "^4.10.1",
     "ts-node": "^10.9.1",
