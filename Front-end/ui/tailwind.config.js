@@ -11,6 +11,9 @@ module.exports = {
 			'xs': '240px',
 		  },
 	},
+	fontFamily: {
+		display: ["Inter", "sans-serif"],
+	  },
   },
   plugins: [],
 }
