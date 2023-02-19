@@ -17,3 +17,6 @@ module.exports = {
   },
   plugins: [],
 }
+
+// #32D8AC
+// #0F5A56
