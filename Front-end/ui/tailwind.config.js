@@ -8,11 +8,12 @@ module.exports = {
 		screens: {
 			'3xl': '1600px',
 			'4xl': '1920px',
-			'xs': '240px',
+			'xs': '140px',
 		  },
 	},
 	fontFamily: {
 		display: ["Inter", "sans-serif"],
+		assistant: ["Assistant", "sans-serif"],
 	  },
   },
   plugins: [],
