@@ -14,6 +14,7 @@ module.exports = {
 	fontFamily: {
 		display: ["Inter", "sans-serif"],
 		assistant: ["Assistant", "sans-serif"],
+		rubik : ["Rubik", "sans-serif"],
 	  },
   },
   plugins: [],

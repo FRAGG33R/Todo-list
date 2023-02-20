@@ -5,8 +5,8 @@ import LandingPageBackground from '../assets/LandingPageBackground.png'
 export default function LandingPage() {
 
 	return (
-		<div className="h-screen w-full flex items-center flex-col bg-[#85ceb9] sm:space-y-72 xs:space-y-24 font-display">
-			<div className='h-screen w-full xs:hidden sm:block filter blur-[4px] absolute top-0 left-0 right-0 bottom-0'>
+		<div className="h-screen w-full flex items-center flex-col sm:bg-gradient-to-r sm:from-[#85ceb9]  sm:via-[#85ceb9]  sm:to-[#85ceb9]  xs:bg-gradient-to-r xs:from-green-200 xs:via-[#85ceb9] xs:to-[#85ceb9] sm:space-y-72 xs:space-y-24 font-rubik">
+			<div className='h-screen w-full xs:hidden sm:block  absolute top-0 left-0 right-0 bottom-0'>
 				<Spline scene="https://prod.spline.design/gTN8efUPLiCmsr-U/scene.splinecode" />
 			</div>
 
