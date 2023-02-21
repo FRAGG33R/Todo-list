@@ -1,12 +1,9 @@
-
 import Logo1 from "../assets/logo.png";
-import { Collapse } from 'flowbite';
 
 export default function NavBar() {
-  
   return (
-    <nav class="font-rubik sm:px-4 py-2.5 fixed w-full top-0 left-0 ">
-      <div class="container flex flex-wrap items-center justify-between mx-auto">
+    <nav class="font-rubik sm:px-4 py-2.5 fixed w-full top-0 left-0">
+      <div class="sm:container flex items-center justify-between mx-auto w-full">
         <a href="#" class="flex items-center">
           <img
             src={Logo1}
