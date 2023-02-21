@@ -5,6 +5,8 @@ import reportWebVitals from './reportWebVitals';
 import { Auth0Provider } from "@auth0/auth0-react";
 import LandingPage from './components/LandingPage';
 import NavBar from './components/NavBar';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import PageNotFound from './components/404';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,9 +17,14 @@ root.render(
 		authorizationParams={{
 		redirect_uri: window.location.origin
     }}
-  >
-	<NavBar />
-	<LandingPage />
+	>
+	<BrowserRouter>
+		<Routes>
+			<Route exact path="/" element={<LandingPage/>}></Route>
+			<Route  path="/app" element={null}></Route>
+			<Route  path="*" element={<PageNotFound />}></Route>
+		</Routes>
+	</BrowserRouter>
   </Auth0Provider>
   </React.StrictMode>
 );
