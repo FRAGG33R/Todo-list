@@ -6,7 +6,7 @@ const app = express();
 
 app.use(bodyParser.json());
 
-app.post('/', async (req, res) => {
+app.post('/app', async (req, res) => {
 	console.log(req.body);
 	const user = await prisma.user.create(
 		{
