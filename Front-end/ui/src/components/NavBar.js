@@ -5,7 +5,7 @@ import { Collapse } from 'flowbite';
 export default function NavBar() {
   
   return (
-    <nav class="font-rubik sm:px-4 py-2.5 fixed w-full z-20 top-0 left-0 ">
+    <nav class="font-rubik sm:px-4 py-2.5 fixed w-full top-0 left-0 ">
       <div class="container flex flex-wrap items-center justify-between mx-auto">
         <a href="#" class="flex items-center">
           <img

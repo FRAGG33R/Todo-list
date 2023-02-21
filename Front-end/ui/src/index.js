@@ -20,7 +20,6 @@ root.render(
 	{/* here we go */}
 	<NavBar />
 	<LandingPage />
-	{/* <Rive src={loader} /> */}
   </Auth0Provider>
   </React.StrictMode>
 );
