@@ -14,15 +14,16 @@ root.render(
   <React.StrictMode>
 	 <Auth0Provider
 		domain="dev-0yk577wbejgxl3th.us.auth0.com"
-		clientId="YsupPYNDoLZtCtHSuyxydLn1wqkPIE2O"
+		clientId="WC8j7S33W30WeVM6Xi4gg5v6MHYbgQVl"
+		skipRedirectCallback={window.location.pathname === '/callback'}
 		authorizationParams={{
-		redirect_uri: window.location.origin
+		redirect_uri: "http://localhost:3000/callback"
     }}
 	>
 	<BrowserRouter>
 		<Routes>
 			<Route exact path="/" element={<LandingPage/>}></Route>
-			<Route  path="/app" element={<SideBar />}></Route>
+			<Route  path="/callback" element={<SideBar />}></Route>
 			<Route  path="*" element={<PageNotFound />}></Route>
 		</Routes>
 	</BrowserRouter>

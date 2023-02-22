@@ -1,7 +1,7 @@
 
 import App from "./App"
-import Logo from '../assets/SideBarLogo.png'
-import { useAuth0 } from "@auth0/auth0-react";
+// import Logo from '../assets/SideBarLogo.png'
+
 
 export default function SideBar() {
 	return (
