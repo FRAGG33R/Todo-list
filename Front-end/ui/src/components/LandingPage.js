@@ -1,10 +1,13 @@
 import Spline from "@splinetool/react-spline";
 import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from './NavBar';
-
+import SideBar from "./SideBar";
+import { useEffect } from "react";
 
 export default function LandingPage() {
   const { loginWithRedirect } = useAuth0();
+  const { user, isAuthenticated, isLoading } = useAuth0();
+	useEffect(() => {console.log(isAuthenticated)}, [])
 
   return (
 	<>
