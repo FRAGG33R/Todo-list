@@ -7,6 +7,7 @@ import LandingPage from './components/LandingPage';
 import NavBar from './components/NavBar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import PageNotFound from './components/404';
+import SideBar from './components/SideBar';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -21,7 +22,7 @@ root.render(
 	<BrowserRouter>
 		<Routes>
 			<Route exact path="/" element={<LandingPage/>}></Route>
-			<Route  path="/app" element={null}></Route>
+			<Route  path="/app" element={<SideBar />}></Route>
 			<Route  path="*" element={<PageNotFound />}></Route>
 		</Routes>
 	</BrowserRouter>
