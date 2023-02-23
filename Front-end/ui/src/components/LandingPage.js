@@ -6,9 +6,6 @@ import { useEffect } from "react";
 
 export default function LandingPage() {
   const { loginWithRedirect } = useAuth0();
-  const { user, isAuthenticated, isLoading } = useAuth0();
-	useEffect(() => {console.log(isAuthenticated)}, [])
-
   return (
 	<>
 		<NavBar />
@@ -29,7 +26,7 @@ export default function LandingPage() {
 			</div>
 			<button
 				class="px-5 py-2.5 relative rounded-full group text-white font-medium inline-block"
-				onClick={() => loginWithRedirect()}
+				onClick={() => {loginWithRedirect()}}
 				>
 				<span class="absolute top-0 left-0 w-full h-full rounded-full opacity-50 filter blur-sm bg-[#156d69]"></span>
 				<span class="absolute inset-0 w-full h-full transition-all duration-200 ease-out rounded-full shadow-xl bg-[#156d69] filter group-active:opacity-0 group-hover:blur-[5px] "></span>

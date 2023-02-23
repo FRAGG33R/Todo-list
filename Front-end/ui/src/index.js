@@ -15,7 +15,6 @@ root.render(
 	 <Auth0Provider
 		domain="dev-0yk577wbejgxl3th.us.auth0.com"
 		clientId="WC8j7S33W30WeVM6Xi4gg5v6MHYbgQVl"
-		skipRedirectCallback={window.location.pathname === '/app'}
 		authorizationParams={{
 		redirect_uri: "http://localhost:3000/app"
     }}

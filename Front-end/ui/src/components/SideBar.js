@@ -2,27 +2,31 @@
 import App from "./App"
 // import Logo from '../assets/SideBarLogo.png'
 import { useAuth0 } from '@auth0/auth0-react';
-import { useEffect, useInsertionEffect } from "react";
-
+import { useEffect, useInsertionEffect, useState } from "react";
+import { Navigate } from 'react-router-dom';
 
 export default function SideBar() {
-	const { user, isAuthenticated, isLoading } = useAuth0();
+	const { user, isAuthenticated, isLoading  } = useAuth0();
+	const [counter, setCounter] = useState(3);
+
 	useEffect(() => {
-		console.log(user, isAuthenticated);
-	}, []);
+
+
+	}, [isAuthenticated, user]);
 	if (isLoading)
-	{
-		return (<div>Loading....</div>)
-	}
+		return <h1>loading</h1>
+	else if (!isLoading && !isAuthenticated)
+		return (<Navigate to="/" />)
+	else
 	return (
-		 <div class="min-h-screen flex flex-row bg-[#85ceb9] font-rubik tracking-wider">
+		<div class="min-h-screen flex flex-row bg-[#85ceb9] font-rubik tracking-wider">
 			<div class="flex flex-col w-56 rounded-r-3xl overflow-hidden drop-shadow-2xl bg-[#1c5d51]">
 				<div class="flex items-center justify-center h-20">
-					{/* <img id="avatarButton" type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" class="w-10 h-10 rounded-full cursor-pointer" src={user.picture} alt="User dropdown" />
+					<img id="avatarButton" type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" class="w-10 h-10 rounded-full cursor-pointer" src={user?.picture} alt="User dropdown" />
 					<div id="userDropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
 						<div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-							<div>{user.name}</div>
-							<div class="font-medium truncate">{user.email}</div>
+							<div>{user?.name}</div>
+							<div class="font-medium truncate">{user?.email}</div>
 						</div>
 						<ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
 							<li>
@@ -38,7 +42,7 @@ export default function SideBar() {
 						<div class="py-1">
 							<a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
 						</div>
-					</div> */}
+					</div>
 				</div>
 				<ul class="flex flex-col space-y-4 py-6">
 				<li>
@@ -89,4 +93,5 @@ export default function SideBar() {
 		</div>
 			
 	)
+
 }
