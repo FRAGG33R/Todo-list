@@ -4,8 +4,12 @@
   "private": true,
   "dependencies": {
     "@auth0/auth0-react": "^2.0.0",
+    "@emotion/react": "^11.10.6",
     "@headlessui/react": "^1.7.11",
     "@heroicons/react": "^2.0.16",
+    "@mantine/core": "^5.10.4",
+    "@mantine/form": "^5.10.4",
+    "@mantine/hooks": "^5.10.4",
     "@splinetool/react-spline": "^2.2.5",
     "@tabler/icons-react": "^2.5.0",
     "@testing-library/jest-dom": "^5.16.5",

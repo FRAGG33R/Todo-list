@@ -7,7 +7,7 @@ import Modal from './Modal'
 export default function SideBar() {
   const { user, isAuthenticated, isLoading } = useAuth0();
   const [toDos, setToDos] = useState([]);
-  const [modal, setModal] = useState({title : "add", description : "control your life", state : false , button : "Add"});
+  const [modal, setModal] = useState({title : "Create To-do list", description : "Create To-do list", state : false , button : "Add"});
 
   function createToDo() {
     setToDos((prev) => [...prev, { title: "todo item" }]);
@@ -37,17 +37,15 @@ export default function SideBar() {
           </ul>
           <button
             onClick={() => {
-              createToDo();
-				// setModal({title : "add", description : "control your life", state : true , button : "Add"})
+            //   createToDo();
+				setModal({title : "Create To-do list", description : "Create To-do list", state : true , button : "Add"})
             }}
             href="#_"
             class="self-center flex items-center justify-center w-[40px] h-[40px] font-medium bg-[#113932] hover:bg-[#1a5047] rounded-full "
           >
             <IconPlus color="white" />
           </button>
-			{/* <Modal state={modal.state}  title={modal.title} description={modal.description} utton={modal.button}/> */}
-
-		  {/*  */}
+			<Modal state={modal.state}  title={modal.title} description={modal.description} button={modal.button}/>
         </div>
         <App />
       </div>

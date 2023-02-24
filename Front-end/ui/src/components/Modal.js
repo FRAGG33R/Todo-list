@@ -1,17 +1,36 @@
-import { Fragment, useEffect, useRef, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
+import { Fragment, useEffect, useRef, useState } from "react";
+import { Dialog, Transition } from "@headlessui/react";
+import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
+import { IconPuzzle } from '@tabler/icons-react';
+import { useForm } from '@mantine/form';
+import { TextInput, Button, Group } from '@mantine/core';
+import { randomId } from '@mantine/hooks';
+
 
 export default function Example(props) {
-const [open, setOpen] = useState(false);
-	useEffect(() => {
-		setOpen(props.state)
-	}, [props]);
+  const [open, setOpen] = useState(false);
+  const cancelButtonRef = useRef(null);
+  const form = useForm({
+	initialValues: {
+	  name: '',
+	},
+	validate: {
+		name: (value) => (value.length < 4 ? 'Name must have at least 4 letters' : null)
+	}
+  });
 
-  const cancelButtonRef = useRef(null)
+  useEffect(() => {
+    setOpen(props.state);
+  }, [props]);
+
   return (
     <Transition.Root show={open} as={Fragment}>
-      <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
+      <Dialog
+        as="div"
+        className="relative z-10"
+        initialFocus={cancelButtonRef}
+        onClose={setOpen}
+      >
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -38,26 +57,29 @@ const [open, setOpen] = useState(false);
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                 <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                   <div className="sm:flex sm:items-start">
-                    <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                      <ExclamationTriangleIcon className="h-6 w-6 text-red-600" aria-hidden="true" />
+                    <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
+                      <IconPuzzle color="green"/>
                     </div>
                     <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                      <Dialog.Title as="h3" className="text-base font-semibold leading-6 text-gray-900">
-                        {props?.tilte}
-                      </Dialog.Title>
                       <div className="mt-2">
                         <p className="text-sm text-gray-500">
-							{props?.description}
+                          {props?.description}
                         </p>
                       </div>
                     </div>
                   </div>
                 </div>
+				<div className="rounded-full " style={{ maxWidth: 320, margin: 'auto' }}>
+					<TextInput label="Name" placeholder="Name" {...form.getInputProps('name')} />
+				</div>
                 <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                   <button
                     type="button"
-                    className="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
-                    onClick={() => setOpen(false)}
+                    className="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
+                    onClick={() => {
+						setOpen(false)
+						console.log(form.getInputProps('name').value);
+					}}
                   >
                     {props?.button}
                   </button>
@@ -68,5 +90,5 @@ const [open, setOpen] = useState(false);
         </div>
       </Dialog>
     </Transition.Root>
-  )
+  );
 }
