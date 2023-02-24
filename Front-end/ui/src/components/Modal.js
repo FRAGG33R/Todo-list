@@ -12,7 +12,14 @@ import { randomId } from '@mantine/hooks';
 export default function Example(props) {
   const [open, setOpen] = useState(false);
   const cancelButtonRef = useRef(null);
+  const [value, setValue] = useState('');
+  const [name, setName] = useState('');
+//   value={email} onChange={(e) => setEmail(e.target.value)}
 
+  const handleSubmit = (event) => {
+    event.preventDefault(); // prevent form submission
+    console.log('Name:', name);
+  };
   useEffect(() => {
     setOpen(props.state);
   }, [props]);
@@ -48,8 +55,8 @@ export default function Example(props) {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="flex items-center justify-center  flex-col relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-                <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm">
+                <div className="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                   <div className="sm:flex sm:items-start">
                     <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
                       <IconPuzzle color="green"/>
@@ -63,21 +70,22 @@ export default function Example(props) {
                     </div>
                   </div>
                 </div>
-				<form class="w-full max-w-sm lex items-center justify-center">
-					<div class="flex items-center border-b border-teal-500 py-2">
-						<input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Name" aria-label="Name" />
-					</div>
-				</form>
-
-                <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                  <button
-                    type="button"
-                    className="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
-                    onClick={() => setOpen(false)}
-                  >
-                    {props?.button}
-                  </button>
-                </div>
+				<div className="w-full h-full p-0 m-0 pl-3">
+					<form onSubmit={handleSubmit} className="w-full h-full flex items-start justify-start flex-col">
+						<div className="mb-6 w-full ">
+							<input type="text" id="name" className="bg-gray-50 border border-green-900 text-gray-900 text-sm rounded-full focus:ring-[#1c5d51] focus:border-[#1c5d51] block w-10/12 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#1c5d51] dark:focus:border-[#1c5d51]" placeholder="Todo list name" value={name} onChange={(e) => setName(e.target.value)} required />
+						</div>
+						<button
+						type="submit"
+						className="self-end mb-3 mr-3 inline-flex w-full justify-center rounded-full border border-transparent bg-[#1c5d51] px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-[#147157] focus:outline-none focus:ring-2 focus:ring-[#1c5d51] focus:ring-offset-2  sm:w-auto sm:text-sm"
+						onClick={() => {
+							setOpen(false);
+						}}
+					>
+						{props?.button}
+					</button>
+					</form>
+				</div>
               </Dialog.Panel>
             </Transition.Child>
           </div>
