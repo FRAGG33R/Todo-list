@@ -1,32 +1,33 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
 import { Auth0Provider } from "@auth0/auth0-react";
-import LandingPage from './components/LandingPage';
-import NavBar from './components/NavBar';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import PageNotFound from './components/404';
-import SideBar from './components/SideBar';
+import LandingPage from "./components/LandingPage";
+import NavBar from "./components/NavBar";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import PageNotFound from "./components/404";
+import SideBar from "./components/SideBar";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-	 <Auth0Provider
-		domain="dev-0yk577wbejgxl3th.us.auth0.com"
-		clientId="WC8j7S33W30WeVM6Xi4gg5v6MHYbgQVl"
-		authorizationParams={{
-		redirect_uri: "http://localhost:3000/app"
-    }}
-	>
+    <Auth0Provider
+      domain="dev-0yk577wbejgxl3th.us.auth0.com"
+      clientId="WC8j7S33W30WeVM6Xi4gg5v6MHYbgQVl"
+      authorizationParams={{
+        redirect_uri: "http://localhost:3000/app",
+      }}
+    >
 	<BrowserRouter>
 		<Routes>
-			<Route exact path="/" element={<LandingPage/>}></Route>
-			<Route  path="/app" element={<SideBar />}></Route>
-			<Route  path="*" element={<PageNotFound />}></Route>
+		<Route exact path="/" element={<LandingPage />}></Route>
+		<Route path="/app" element={<SideBar />}></Route>
+		<Route path="*" element={<PageNotFound />}></Route>
 		</Routes>
 	</BrowserRouter>
-  </Auth0Provider>
+    </Auth0Provider>
   </React.StrictMode>
 );
 
