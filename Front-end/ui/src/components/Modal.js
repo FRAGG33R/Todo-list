@@ -7,6 +7,7 @@ const [open, setOpen] = useState(false);
 	useEffect(() => {
 		setOpen(props.state)
 	}, [props]);
+
   const cancelButtonRef = useRef(null)
   return (
     <Transition.Root show={open} as={Fragment}>

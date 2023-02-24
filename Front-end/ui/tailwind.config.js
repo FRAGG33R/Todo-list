@@ -11,6 +11,12 @@ module.exports = {
 			'4xl': '1920px',
 			'xs': '140px',
 		  },
+		  colors: {
+			custom: {
+				DEFAULT: '#10B981',
+				light: '#D1FAE5'
+			}
+		},
 	},
 	fontFamily: {
 		display: ["Inter", "sans-serif"],
@@ -19,6 +25,7 @@ module.exports = {
 	  },
   },
   plugins: [
-	require('flowbite/plugin')
+	require('flowbite/plugin'),
+	require('tailwind-scrollbar')
   ],
 }

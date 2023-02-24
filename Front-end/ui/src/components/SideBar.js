@@ -17,8 +17,8 @@ export default function SideBar() {
   else if (!isLoading && !isAuthenticated) return <Navigate to="/" />;
   else
     return (
-      <div class="contianer min-h-screen flex flex-row bg-[#85ceb9] font-rubik tracking-wider">
-        <div class="flex flex-col w-56 rounded-r-3xl overflow-hidden drop-shadow-2xl bg-[#1c5d51]">
+      <div class="contianer h-screen flex flex-row bg-[#85ceb9] font-rubik tracking-wider">
+        <div class="flex flex-col w-56 overflow-scroll overflow-x-hidden scrollbar scrollbar-thumb-[#16433a] scrollbar-track-[#1c5d51] drop-shadow-2xl bg-[#1c5d51]">
           <div class="relative w-full pt-4 flex items-center justify-center ">
             <img class="w-10 h-10 rounded-full" src={user?.picture} alt="" />
           </div>
@@ -37,16 +37,15 @@ export default function SideBar() {
           </ul>
           <button
             onClick={() => {
-            //   createToDo();
-				setModal({title : "add", description : "control your life", state : true , button : "Add"})
+              createToDo();
+				// setModal({title : "add", description : "control your life", state : true , button : "Add"})
             }}
             href="#_"
-            class="self-center flex items-center justify-center w-[40px] h-[40px] font-medium bg-[#113932] hover:bg-[#113932] hover:text-blue-600 text-blue-500 rounded-full text-sm"
+            class="self-center flex items-center justify-center w-[40px] h-[40px] font-medium bg-[#113932] hover:bg-[#1a5047] rounded-full "
           >
             <IconPlus color="white" />
           </button>
-			<Modal state={modal.state}  title={modal.title} description={modal.description} button={modal.button}/>
-
+			{/* <Modal state={modal.state}  title={modal.title} description={modal.description} utton={modal.button}/> */}
 
 		  {/*  */}
         </div>
