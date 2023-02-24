@@ -7,17 +7,11 @@ import { TextInput, Button, Group } from '@mantine/core';
 import { randomId } from '@mantine/hooks';
 
 
+
+
 export default function Example(props) {
   const [open, setOpen] = useState(false);
   const cancelButtonRef = useRef(null);
-  const form = useForm({
-	initialValues: {
-	  name: '',
-	},
-	validate: {
-		name: (value) => (value.length < 4 ? 'Name must have at least 4 letters' : null)
-	}
-  });
 
   useEffect(() => {
     setOpen(props.state);
@@ -54,13 +48,13 @@ export default function Example(props) {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+              <Dialog.Panel className="flex items-center justify-center  flex-col relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                 <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                   <div className="sm:flex sm:items-start">
                     <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
                       <IconPuzzle color="green"/>
                     </div>
-                    <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                    <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left ">
                       <div className="mt-2">
                         <p className="text-sm text-gray-500">
                           {props?.description}
@@ -69,17 +63,17 @@ export default function Example(props) {
                     </div>
                   </div>
                 </div>
-				<div className="rounded-full " style={{ maxWidth: 320, margin: 'auto' }}>
-					<TextInput label="Name" placeholder="Name" {...form.getInputProps('name')} />
-				</div>
+				<form class="w-full max-w-sm lex items-center justify-center">
+					<div class="flex items-center border-b border-teal-500 py-2">
+						<input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Name" aria-label="Name" />
+					</div>
+				</form>
+
                 <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                   <button
                     type="button"
                     className="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
-                    onClick={() => {
-						setOpen(false)
-						console.log(form.getInputProps('name').value);
-					}}
+                    onClick={() => setOpen(false)}
                   >
                     {props?.button}
                   </button>
