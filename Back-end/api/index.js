@@ -23,7 +23,7 @@ const userExists = async (email) => {
 };
 
 app.get('/', (req, res) => {
-	res.send("hello from server")
+
 })
 
 app.post('/', async (req, res) => {
@@ -36,7 +36,7 @@ app.post('/', async (req, res) => {
 			User: { connect: { id: user.id } },
 		},
 	});
-	res.status(200);
+	res.send(newTodo.name);
 });
 
 app.post('/app', async (req, res) => {
@@ -44,7 +44,7 @@ app.post('/app', async (req, res) => {
 	{
 		const user = await prisma.user.create(
 			{
-				data :{
+				data : {
 					email: req.body.email, 
 					name : req.body.nickName,
 				}
