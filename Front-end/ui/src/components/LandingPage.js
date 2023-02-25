@@ -25,13 +25,13 @@ export default function LandingPage() {
 				and start getting things done.
 			</div>
 			<button
-				class="px-5 py-2.5 relative rounded-full group text-white font-medium inline-block"
+				className="px-5 py-2.5 relative rounded-full group text-white font-medium inline-block"
 				onClick={() => {loginWithRedirect()}}
 				>
-				<span class="absolute top-0 left-0 w-full h-full rounded-full opacity-50 filter blur-sm bg-[#156d69]"></span>
-				<span class="absolute inset-0 w-full h-full transition-all duration-200 ease-out rounded-full shadow-xl bg-[#156d69] filter group-active:opacity-0 group-hover:blur-[5px] "></span>
-				<span class="absolute inset-0 w-full h-full transition duration-200 ease-out rounded-full bg-[#156d69]"></span>
-				<span class="relative">Start for free</span>
+				<span className="absolute top-0 left-0 w-full h-full rounded-full opacity-50 filter blur-sm bg-[#156d69]"></span>
+				<span className="absolute inset-0 w-full h-full transition-all duration-200 ease-out rounded-full shadow-xl bg-[#156d69] filter group-active:opacity-0 group-hover:blur-[5px] "></span>
+				<span className="absolute inset-0 w-full h-full transition duration-200 ease-out rounded-full bg-[#156d69]"></span>
+				<span className="relative">Start for free</span>
 			</button>
 			</div>
 		</div>
