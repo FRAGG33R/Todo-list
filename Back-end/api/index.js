@@ -18,6 +18,11 @@ app.get('/', (req, res) => {
 	res.send("hello from server")
 })
 
+app.post('/', async (req, res) => {
+	console.log(req.body);
+	res.status(200).send("hello from the server!");
+});
+
 app.post('/app', async (req, res) => {
 	console.log(req.body);
 	res.status(200).send("hello from the server!");
