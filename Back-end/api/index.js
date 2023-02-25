@@ -5,6 +5,7 @@ import bodyParser from 'body-parser'
 const app = express();
 import cors from 'cors';
 
+
 app.use(bodyParser.json());
 
 var corsOptions = {
@@ -26,6 +27,15 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', async (req, res) => {
+	const user = await prisma.user.findUnique({
+		where: { email : req.body.email},
+	});
+	const newTodo = await prisma.todo.create({
+		data: {
+			name: req.body.name,
+			User: { connect: { id: user.id } },
+		},
+	});
 	res.status(200);
 });
 
