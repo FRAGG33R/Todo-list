@@ -14,19 +14,34 @@ var corsOptions = {
 
 app.use(cors(corsOptions))
 
+const userExists = async (email) => {
+	const posts = await prisma.user.findMany({
+		where: { email },
+	})
+	return posts.length >= 1;
+};
+
 app.get('/', (req, res) => {
 	res.send("hello from server")
 })
 
 app.post('/', async (req, res) => {
-	console.log(req.body);
-	res.status(200).send("hello from the server!");
+	res.status(200);
 });
 
 app.post('/app', async (req, res) => {
-	console.log(req.body);
-	res.status(200).send("hello from the server!");
+	if (!(await userExists(req.body.email)))
+	{
+		const user = await prisma.user.create(
+			{
+				data :{
+					email: req.body.email, 
+					name : req.body.nickName,
+				}
+			}
+		)
+	}
+	res.status(200)
 });
-
 
 app.listen(3001);
