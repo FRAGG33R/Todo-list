@@ -3,15 +3,25 @@ import express from 'express'
 const prisma = new PrismaClient();
 import bodyParser from 'body-parser'
 const app = express();
+import cors from 'cors';
 
 app.use(bodyParser.json());
 
-app.post('/app', (req, res) => {
-	console.log(req.body);
-	res.status(200);
-})
+var corsOptions = {
+	origin: '*',
+	optionsSuccessStatus: 200
+}
+
+app.use(cors(corsOptions))
+
 app.get('/', (req, res) => {
-
+	res.send("hello from server")
 })
 
-app.listen(300);
+app.post('/app', async (req, res) => {
+	console.log(req.body);
+	res.status(200).send("hello from the server!");
+});
+
+
+app.listen(3001);
