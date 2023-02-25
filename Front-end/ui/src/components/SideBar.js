@@ -15,9 +15,19 @@ export default function SideBar() {
 		{	
 			axios.post("http://localhost:3001/app", {
 				email : user.email,
-				nickName : user.nickname,
 			})
-			.then(function () {
+			.then(function (res) {
+				console.log(res);
+			})
+			.catch(function () {
+				console.log("Network error");
+			});
+			axios.get("http://localhost:3001/app", {
+				email : user.email,
+			})
+			.then(function (res) {
+				setToDos(res.data);
+				console.log(res.data);
 			})
 			.catch(function () {
 				console.log("Network error");
@@ -54,7 +64,6 @@ export default function SideBar() {
 			</ul>
 			<button
 			  onClick={() => {
-			  //   createToDo();
 				  setModal({title : "Create To-do list", description : "Create To-do list", state : true , button : "Add"})
 			  }}
 			  href="#_"
