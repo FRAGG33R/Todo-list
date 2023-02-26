@@ -38,12 +38,9 @@ export default function SideBar() {
     setToDos((prev) => [...prev, { name : tempName }]);
 	setModal({title : "Create To-do list", description : "Create To-do list", state : false , button : "Add"})
   }
-
-  if (isLoading) return <h1>loading ...</h1>;
-  else if (!isLoading && !isAuthenticated) return <Navigate to="/" />;
-  else
-  {
-	return (
+  return (
+	<div>
+		{isLoading ? console.log("loading...") : !isAuthenticated ? <Navigate to="/" /> :
 		<div className="contianer h-screen flex flex-row bg-[#85ceb9] font-rubik tracking-wider">
 		  <div className="flex flex-col w-56 overflow-scroll overflow-x-hidden scrollbar scrollbar-thumb-[#16433a] scrollbar-track-[#1c5d51] drop-shadow-2xl bg-[#1c5d51]">
 			<div className="relative w-full pt-4 flex items-center justify-center ">
@@ -75,6 +72,7 @@ export default function SideBar() {
 		  </div>
 		  <App />
 		</div>
-	  );
-  }
+		}
+	</div>
+  )
 }
