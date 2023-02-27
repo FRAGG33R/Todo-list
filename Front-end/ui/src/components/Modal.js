@@ -18,7 +18,7 @@ export default function Example(props) {
 		props.add(res.data)
       })
       .catch(function (err) {
-        console.log("Network error ");
+        console.log("Network error 1");
       });
   };
 

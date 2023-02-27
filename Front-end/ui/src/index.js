@@ -11,7 +11,6 @@ import SideBar from "./components/SideBar";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
     <Auth0Provider
       domain="dev-0yk577wbejgxl3th.us.auth0.com"
       clientId="WC8j7S33W30WeVM6Xi4gg5v6MHYbgQVl"
@@ -26,8 +25,7 @@ root.render(
 		<Route path="*" element={<PageNotFound />}></Route>
 		</Routes>
 	</BrowserRouter>
-    </Auth0Provider>
-  </React.StrictMode>
+	</Auth0Provider>
 );
 
 reportWebVitals();
