@@ -14,25 +14,6 @@ var corsOptions = {
 
 app.use(cors(corsOptions))
 
-const userExists = async (email) => {
-	const posts = await prisma.user.findMany({
-		where: { email },
-	})
-	console.log(posts.length, email);
-	return posts.length >= 1;
-};
-
-const todoExists = async (user, name) => {
-	const posts = await prisma.todo.findMany({
-		where: {
-			name,
-			userId : user.id
-		},
-
-	})
-	return posts.length >= 1;
-};
-
 app.post('/app/todos',  async (req, res) => {
 	const user = await prisma.user.findUnique({
 		where: { email : req.body.email},
@@ -52,11 +33,11 @@ app.post('/app/todos',  async (req, res) => {
 })
 
 app.post('/', async (req, res) => {
-	const user = await prisma.user.findUnique({
-		where: { email : req.body.email},
-	});
-	if (!(await todoExists(user, req.body.name)))
+	try
 	{
+		const user = await prisma.user.findUnique({
+			where: { email : req.body.email},
+		});
 		const newTodo = await prisma.todo.create({
 			data: {
 				name: req.body.name,
@@ -65,13 +46,13 @@ app.post('/', async (req, res) => {
 		});
 		res.send(newTodo.name);
 	}
-	else
-		res.send(null);
+	catch(err)
+	{
+		console.log(err);
+	}
 });
 
 app.post('/app', async (req, res) => {
-	console.log("user email", req.body.email);
-	console.log("user name", req.body.name);
 	const existingUser = await prisma.user.findUnique({
 		where: { email: req.body.email }
 	  });
