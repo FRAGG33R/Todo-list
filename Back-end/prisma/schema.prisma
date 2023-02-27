@@ -24,7 +24,7 @@ model Task {
 
 model Todo {
   id     Int    @id @default(autoincrement())
-  name	String 
+  name	String  @unique
   tasks  Task[]
   User   User?  @relation(fields: [userId], references: [id])
   userId Int?

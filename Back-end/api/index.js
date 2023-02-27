@@ -22,12 +22,18 @@ const userExists = async (email) => {
 	return posts.length >= 1;
 };
 
+const todoExists = async (name) => {
+	const posts = await prisma.todo.findMany({
+		where: { name },
+	})
+	return posts.length >= 1;
+};
+
 // app.get('/', (req, res) => {
 
 // })
 
 app.post('/app/todos',  async (req, res) => {
-	console.log("request is :", req.body);
 	const user = await prisma.user.findUnique({
 		where: { email : req.body.email},
 	});
@@ -43,13 +49,20 @@ app.post('/', async (req, res) => {
 	const user = await prisma.user.findUnique({
 		where: { email : req.body.email},
 	});
-	const newTodo = await prisma.todo.create({
-		data: {
-			name: req.body.name,
-			User: { connect: { id: user.id } },
-		},
-	});
-	res.send(newTodo.name);
+	if (!(await todoExists(req.body.name)))
+	{
+		const newTodo = await prisma.todo.create({
+			data: {
+				name: req.body.name,
+				User: { connect: { id: user.id } },
+			},
+		});
+		res.send(newTodo.name);
+	}
+	else
+	{
+		res.send("could not");
+	}
 });
 
 app.post('/app', async (req, res) => {
