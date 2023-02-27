@@ -113,20 +113,22 @@ function SideBar() {
               </li>
             ))}
           </ul>
-          <button
-            onClick={() => {
-              setModal({
-                title: "Create To-do list",
-                description: "Create To-do list",
-                state: true,
-                button: "Add",
-              });
-            }}
-            href="#_"
-            className="self-center flex items-center justify-center w-[40px] h-[40px] font-medium bg-[#113932] hover:bg-[#1a5047] rounded-full "
-          >
-            <IconPlus color="white" />
-          </button>
+		  <div className="w-full h-16 flex items-center justify-center pb-4">
+			<button
+				onClick={() => {
+				setModal({
+					title: "Create To-do list",
+					description: "Create To-do list",
+					state: true,
+					button: "Add",
+				});
+				}}
+				href="#_"
+				className="self-center flex items-center justify-center w-[40px] h-[40px] font-medium bg-[#113932] hover:bg-[#1a5047] rounded-full "
+			>
+				<IconPlus color="white" />
+			</button>
+		  </div>
           <Modal
             state={modal.state}
             title={modal.title}

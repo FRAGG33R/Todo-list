@@ -66,7 +66,6 @@ app.post('/app', async (req, res) => {
 				}
 			}
 		)
-		console.log("the user added successfuly" , user);
 	}
 });
 
