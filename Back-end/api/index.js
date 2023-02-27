@@ -5,7 +5,6 @@ import bodyParser from 'body-parser'
 const app = express();
 import cors from 'cors';
 
-
 app.use(bodyParser.json());
 
 var corsOptions = {
@@ -28,10 +27,6 @@ const todoExists = async (name) => {
 	})
 	return posts.length >= 1;
 };
-
-// app.get('/', (req, res) => {
-
-// })
 
 app.post('/app/todos',  async (req, res) => {
 	const user = await prisma.user.findUnique({
@@ -60,9 +55,7 @@ app.post('/', async (req, res) => {
 		res.send(newTodo.name);
 	}
 	else
-	{
-		res.send("could not");
-	}
+		res.send(null);
 });
 
 app.post('/app', async (req, res) => {
