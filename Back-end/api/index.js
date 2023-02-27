@@ -22,8 +22,21 @@ const userExists = async (email) => {
 	return posts.length >= 1;
 };
 
-app.get('/', (req, res) => {
+// app.get('/', (req, res) => {
 
+// })
+
+app.post('/app/todos',  async (req, res) => {
+	console.log("request is :", req.body);
+	const user = await prisma.user.findUnique({
+		where: { email : req.body.email},
+	});
+	const Todos = await prisma.todo.findMany({
+		where: {
+			userId : user.id
+		},
+	});
+	res.status(200).send(Todos);
 })
 
 app.post('/', async (req, res) => {

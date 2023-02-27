@@ -5,7 +5,27 @@ import { Navigate } from "react-router-dom";
 import { IconNotes, IconPlus } from "@tabler/icons-react";
 import axios from "axios"
 import Modal from './Modal'
-export default function SideBar() {
+import { withAuthenticationRequired } from '@auth0/auth0-react';
+
+export default withAuthenticationRequired(SideBar, {
+  onRedirecting: () => <Redirect />,
+});
+
+function Redirect() {
+	const { user, isAuthenticated, isLoading } = useAuth0();
+	useEffect(() => {
+		const id = setTimeout(() => {
+			if (!isAuthenticated)
+				window.location.href = "/"
+			}, 800);
+		return () => {
+			clearTimeout(id);
+		}
+	}, [])
+	return (<div></div>)
+}
+
+function SideBar() {
   const { user, isAuthenticated, isLoading } = useAuth0();
   const [toDos, setToDos] = useState([]);
   const [modal, setModal] = useState({title : "Create To-do list", description : "Create To-do list", state : false , button : "Add"});
@@ -17,30 +37,28 @@ export default function SideBar() {
 				email : user.email,
 			})
 			.then(function (res) {
-				console.log(res);
 			})
 			.catch(function () {
 				console.log("Network error");
 			});
-			axios.get("http://localhost:3001/app", {
+			axios.post("http://localhost:3001/app/todos", {
 				email : user.email,
 			})
 			.then(function (res) {
 				setToDos(res.data);
-				console.log(res.data);
 			})
 			.catch(function () {
 				console.log("Network error");
 			});
 		}
 	}, [isAuthenticated])
-  function createToDo(tempName) {
+  function createToDo(tempName)
+  {
     setToDos((prev) => [...prev, { name : tempName }]);
 	setModal({title : "Create To-do list", description : "Create To-do list", state : false , button : "Add"})
   }
   return (
 	<div>
-		{isLoading ? console.log("loading...") : !isAuthenticated ? <Navigate to="/" /> :
 		<div className="contianer h-screen flex flex-row bg-[#85ceb9] font-rubik tracking-wider">
 		  <div className="flex flex-col w-56 overflow-scroll overflow-x-hidden scrollbar scrollbar-thumb-[#16433a] scrollbar-track-[#1c5d51] drop-shadow-2xl bg-[#1c5d51]">
 			<div className="relative w-full pt-4 flex items-center justify-center ">
@@ -53,7 +71,7 @@ export default function SideBar() {
 					href="#_"
 					className="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-white"
 				  >
-					<IconNotes height={18} color="white" stroke-width="1.25" />
+					<IconNotes height={18} color="white" strokeWidth="1.25" />
 					<span className="text-sm font-medium pl-1">{item.name.length < 15 ? item.name : item.name.substr(0, 15) + "..."}</span>
 				  </a>
 				</li>
@@ -72,7 +90,6 @@ export default function SideBar() {
 		  </div>
 		  <App />
 		</div>
-		}
 	</div>
   )
 }
