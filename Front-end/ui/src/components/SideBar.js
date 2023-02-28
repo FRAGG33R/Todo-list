@@ -6,7 +6,7 @@ import axios from "axios";
 import Modal from "./Modal";
 import { withAuthenticationRequired } from "@auth0/auth0-react";
 import toast, { Toaster } from "react-hot-toast";
-
+import DropDown from "./DropDown";
 const notify = () =>
   toast.error("Oops! That name already exists.", {
     style: {
@@ -94,23 +94,9 @@ function SideBar() {
           </div>
           <ul className="flex pl-3 flex-col space-y-4 py-4 w-full">
             {toDos.length > 0 && toDos.map((item) => (
-              <li>
-                <a
-                  href="#_"
-                  className="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-white"
-                >
-                  <IconCalendarEvent
-                    height={19}
-                    color="white"
-                    strokeWidth="2"
-                  />
-                  <span className="text-sm font-medium pl-1">
-                    {item.name.length < 20
-                      ? item.name
-                      : item.name.substr(0, 20) + "..."}
-                  </span>
-                </a>
-              </li>
+				<li>
+					<DropDown name={item.name.length < 20 ? item.name : item.name.substr(0, 20) + "..."}/>
+				</li>
             ))}
           </ul>
 		  <div className="w-full h-16 flex items-center justify-center pb-4">

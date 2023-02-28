@@ -7,7 +7,7 @@ import LandingPage from "./components/LandingPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PageNotFound from "./components/404";
 import SideBar from "./components/SideBar";
-
+import * as te from 'tw-elements';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
