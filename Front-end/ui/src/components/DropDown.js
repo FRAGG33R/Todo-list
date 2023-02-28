@@ -2,8 +2,14 @@ import { IconCalendarEvent } from "@tabler/icons-react";
 
 function removeTodo()
 {
-	
+
 }
+
+window.oncontextmenu = function (e) {
+	e.preventDefault();
+	alert('Right Click')
+}
+
 export default function DropDown(props) {
   return (
     <div class="flex justify-start items-center">
@@ -34,7 +40,7 @@ export default function DropDown(props) {
                 class="block w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal text-[#174a41] hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600"
                 href="#"
                 data-te-dropdown-item-ref
-				onClick={null}
+				onClick={removeTodo}
               	>
                 Delete
               </button>

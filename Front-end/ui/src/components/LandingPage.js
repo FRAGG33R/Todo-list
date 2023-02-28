@@ -5,7 +5,6 @@ import SideBar from "./SideBar";
 import { useEffect } from "react";
 
 
-
 export default function LandingPage() {
   const { loginWithRedirect } = useAuth0();
   return (
