@@ -84,7 +84,7 @@ function SideBar() {
     <div>
       <div className="contianer h-screen flex flex-row bg-[#85ceb9] font-rubik tracking-wider">
         <Toaster position="top-right" reverseOrder={true} />
-        <div className="flex flex-col w-72 overflow-scroll overflow-x-hidden scrollbar scrollbar-thumb-[#16433a] scrollbar-track-[#1c5d51] drop-shadow-2xl bg-[#1c5d51]">
+        <div className="flex flex-col w-72 overflow-scroll overflow-x-hidden   scrollbar-thin scrollbar-thumb-[#16433a] scrollbar-track-[#1d5d51] overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full  drop-shadow-2xl bg-[#1c5d51]">
           <div className="relative w-full pt-4 flex items-center justify-center ">
             <img
               className="w-10 h-10 rounded-full"
