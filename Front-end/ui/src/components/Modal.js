@@ -15,7 +15,7 @@ export default function Example(props) {
 		email : props.email
       })
       .then(function (res)  {
-		props.add(res.data)
+		props.add(res.data.name, res.data.id)
       })
       .catch(function (err) {
         console.log("Network error 1");

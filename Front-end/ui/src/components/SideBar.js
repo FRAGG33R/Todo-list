@@ -32,7 +32,8 @@ function Redirect() {
   return <div></div>;
 }
 
-function SideBar() {
+function SideBar()
+{
   const { user, isAuthenticated, isLoading } = useAuth0();
   const [toDos, setToDos] = useState([]);
   const [modal, setModal] = useState({
@@ -43,8 +44,8 @@ function SideBar() {
   });
 
   useEffect(() => {
+	
     if (!isLoading && isAuthenticated) {
-      console.log(user.email);
       axios
         .post("http://localhost:3001/app", {
           name: user.nickname,
@@ -59,7 +60,6 @@ function SideBar() {
           email: user.email,
         })
         .then(function (res) {
-          console.log(res);
           setToDos(res.data);
         })
         .catch(function () {
@@ -67,22 +67,21 @@ function SideBar() {
         });
     }
   }, [isAuthenticated]);
-  function createToDo(tempName) {
+
+  function createToDo(tempName, id) {
     if (tempName) {
-      setToDos((prev) => [...prev, { name: tempName }]);
+      setToDos((prev) => [...prev, { name: tempName, id: id}]);
       setModal({
         title: "Create To-do list",
         description: "Create To-do list",
         state: false,
         button: "Add",
       });
-    } else {
-      notify();
     }
   }
   return (
     <div>
-      <div className="contianer h-screen flex flex-row bg-[#85ceb9] font-rubik tracking-wider">
+      <div className=" h-screen flex flex-row bg-[#85ceb9] font-rubik tracking-wider">
         <Toaster position="top-right" reverseOrder={true} />
         <div className="flex flex-col w-72 overflow-scroll overflow-x-hidden   scrollbar-thin scrollbar-thumb-[#16433a] scrollbar-track-[#1d5d51] overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full  drop-shadow-2xl bg-[#1c5d51]">
           <div className="relative w-full pt-4 flex items-center justify-center ">
@@ -95,8 +94,8 @@ function SideBar() {
           <ul className="flex pl-3 flex-col space-y-4 py-4 w-full">
             {toDos.length > 0 && toDos.map((item) => (
 				<li>
-					<DropDown name={item.name.length < 20 ? item.name : item.name.substr(0, 20) + "..."}/>
-				</li>
+					<DropDown name={item.name.length < 20 ? item.name : item.name.substr(0, 20) + "..."} id={item.id} setToDos={setToDos} email={user.email}/>
+				</li>  
             ))}
           </ul>
 		  <div className="w-full h-16 flex items-center justify-center pb-4">
