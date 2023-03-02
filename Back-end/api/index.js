@@ -35,7 +35,6 @@ app.post('/app/todos',  async (req, res) => {
 app.delete('/app', async (req, res) => {
 	try
 	{
-		console.log(req.body);
 		const  deletedTodo = await prisma.todo.delete({
 			where: {
 			  id: req.body.id,
@@ -45,7 +44,7 @@ app.delete('/app', async (req, res) => {
 	}
 	catch(err)
 	{
-		console.log(err);
+		console.log("error has been occurred", err);
 	}
 })
 
@@ -65,7 +64,7 @@ app.post('/', async (req, res) => {
 	}
 	catch(err)
 	{
-		console.log("You are ");
+		console.log("error has been occurred", err);
 	}
 });
 
