@@ -82,7 +82,7 @@ function SideBar() {
     <div>
       <div className=" h-screen flex flex-row bg-[#85ceb9] font-rubik tracking-wider">
         {!open && <button
-          className="h-12 w-12 px-2"
+          className="h-12 w-12 px-2 inline-flex items-center justify-center py-2 text-base font-medium leading-6 text-gray-700 whitespace-no-wrap focus:outline-none focus:shadow-none"
           onClick={() => {
             if (!open) setOpen(true);
             else setOpen(false);
@@ -104,7 +104,7 @@ function SideBar() {
           </svg>
         </button>}
         {open && (
-          <div className="flex flex-col w-72 overflow-scroll overflow-x-hidden   scrollbar-thin scrollbar-thumb-[#16433a] scrollbar-track-[#1d5d51] overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full  drop-shadow-2xl bg-[#1c5d51]">
+          <div className=" flex flex-col w-72 overflow-scroll overflow-x-hidden  scrollbar-thin scrollbar-thumb-[#16433a] scrollbar-track-[#1d5d51] overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full  drop-shadow-2xl bg-[#1c5d51]">
             <div className="w-full pt-4 flex items-center justify-between px-4">
               <img
                 className="w-10 h-10 rounded-full"
