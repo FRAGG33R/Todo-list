@@ -1,17 +1,30 @@
 version: '3.3'
 services:
   db:
-    container_name : 'db'
-    image: mysql:latest
-    environment:
-      MYSQL_DATABASE: 'db'
-      MYSQL_USER: 'user'
-      MYSQL_PASSWORD: 'password'
-      MYSQL_ROOT_PASSWORD: 'password'
+    build:
+      context: .
+      dockerfile: Back-end/dockerfile
+    container_name: db
     ports:
-      - '3306:3306'
+      - "3306:3306"
     volumes:
       - my-db:/var/lib/mysql
-
+    restart: always
+  back-end:
+    build:
+      context: .
+      dockerfile: Back-end/api/dockerfile
+    container_name: back-end
+    ports:
+      - "3001:3001"
+    restart: always
+  front-end:
+    build:
+      context: .
+      dockerfile: Front-end/dockerfile
+    container_name: front-end
+    ports:
+      - "3000:3000"
+    restart: always
 volumes:
   my-db:

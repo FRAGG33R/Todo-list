@@ -4,6 +4,8 @@ WORKDIR /app
 
 COPY . /app
 
+RUN cd /app
+
 RUN npm i
 
 CMD ["node", "index.js"]
