@@ -21,10 +21,11 @@ services:
   front-end:
     build:
       context: .
-      dockerfile: Front-end/dockerfile
+      dockerfile: Front-end/ui/dockerfile
     container_name: front-end
     ports:
       - "3000:3000"
     restart: always
+
 volumes:
   my-db:
