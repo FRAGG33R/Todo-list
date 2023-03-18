@@ -8,6 +8,8 @@ RUN apk update && apk add --no-cache nodejs npm
 
 RUN npm i
 
+RUN npx prisma migrate dev --name init
+
 CMD ["node", "index.js"]
 
 
