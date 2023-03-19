@@ -7,6 +7,7 @@ import Modal from "./Modal";
 import { withAuthenticationRequired } from "@auth0/auth0-react";
 import toast, { Toaster } from "react-hot-toast";
 import DropDown from "./DropDown";
+import { useNavigate } from "react-router-dom";
 const notify = () =>
   toast.error("Oops! That name already exists.", {
     style: {
@@ -34,15 +35,16 @@ function Redirect() {
 
 function SideBar() {
   const { user, isAuthenticated, isLoading } = useAuth0();
+  const navigate = useNavigate();
   const [toDos, setToDos] = useState([]);
   const [open, setOpen] = useState(false);
+  const [displayedTasks, setDisplayedTasks] = useState(0);
   const [modal, setModal] = useState({
     title: "Create To-do list",
     description: "Create To-do list",
     state: false,
     button: "Add",
   });
-
   useEffect(() => {
     if (!isLoading && isAuthenticated) {
       axios
@@ -122,7 +124,9 @@ function SideBar() {
             <ul className="flex pl-3 flex-col space-y-4 py-4 w-full">
               {toDos.length > 0 &&
                 toDos.map((item) => (
-                  <li>
+                  <li onClick={() => {
+					setDisplayedTasks(item.id);
+				  }}>
                     <DropDown
                       name={
                         item.name.length < 20
@@ -162,7 +166,7 @@ function SideBar() {
             />
           </div>
         )}
-        <App />
+        <App id={displayedTasks}/>
       </div>
     </div>
   );
