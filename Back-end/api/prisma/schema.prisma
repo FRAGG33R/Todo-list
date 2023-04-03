@@ -17,9 +17,8 @@ model User {
 model Task {
   id       Int    @id @default(autoincrement())
   content  String
-  authorId Int
+  todo     Todo?  @relation(fields: [todoId], references: [id])
   todoId   Int?
-  Todo     Todo?  @relation(fields: [todoId], references: [id])
 
   @@index([todoId], map: "Task_todoId_fkey")
 }
@@ -29,7 +28,8 @@ model Todo {
   userId Int?
   name   String
   tasks  Task[]
-  User   User?  @relation(fields: [userId], references: [id])
+
+  user   User?  @relation(fields: [userId], references: [id])
 
   @@index([userId], map: "Todo_userId_fkey")
 }

@@ -9,10 +9,9 @@ export default function App(props)
         .get("http://localhost:3001/app/list", {params : {id : props.id}})
         .then(function (res) {
 			console.log(res);
-			setRes(res)})
+		})
         .catch(function (err) {
 			console.log("crash")
-          console.log("Network error", err);
         });
 	}, [props.id]);
 	return (

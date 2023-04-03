@@ -15,11 +15,43 @@ var corsOptions = {
 
 app.use(cors(corsOptions))
 
-app.get('/app/list', (req, res) => {
-	console.log(req)
-	console.log("this is the querry that I need !")
-	console.log(req.query);
-	res.status(200).send("Hello from the server !");
+// app.post('/todos/:todoId/tasks', async (req, res) => {
+// 	const { todoId } = req.params;
+// 	const { content } = req.body;
+  
+// 	const task = await prisma.task.create({
+// 	  data: {
+// 		content,
+// 		todo: { connect: { id: parseInt(todoId) } },
+// 	  },
+// 	});
+  
+// 	res.json(task);
+//   });
+
+
+app.get('/app/list', async (req, res) => {
+	const Id = req.query.id;
+	if (Id > 0)
+	{
+		try {
+			const todo = await prisma.todo.findUnique({
+				where : {id : Id},
+			})
+			if (todo)
+			{
+				console.log(todo.tasks);
+				res.status(200).send(todo.tasks);
+			}
+			else
+			{
+				res.send(null);
+			}
+		}
+		catch (error) {
+			console.log(error);
+		}
+	}
 })
 
 app.post('/app/todos',  async (req, res) => {
@@ -64,7 +96,7 @@ app.post('/', async (req, res) => {
 		const newTodo = await prisma.todo.create({
 			data: {
 				name: req.body.name,
-				User: { connect: { id: user.id } },
+				user: { connect: { id: user.id } },
 			},
 		});
 		res.send({name : newTodo.name, id : newTodo.id});

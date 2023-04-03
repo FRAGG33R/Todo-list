@@ -12,9 +12,9 @@ CREATE TABLE `User` (
 CREATE TABLE `Task` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `content` VARCHAR(191) NOT NULL,
-    `authorId` INTEGER NOT NULL,
     `todoId` INTEGER NULL,
 
+    INDEX `Task_todoId_fkey`(`todoId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -22,7 +22,9 @@ CREATE TABLE `Task` (
 CREATE TABLE `Todo` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `userId` INTEGER NULL,
+    `name` VARCHAR(191) NOT NULL,
 
+    INDEX `Todo_userId_fkey`(`userId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
