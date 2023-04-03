@@ -15,6 +15,13 @@ var corsOptions = {
 
 app.use(cors(corsOptions))
 
+app.get('/app/list', (req, res) => {
+	console.log(req)
+	console.log("this is the querry that I need !")
+	console.log(req.query);
+	res.status(200).send("Hello from the server !");
+})
+
 app.post('/app/todos',  async (req, res) => {
 	const user = await prisma.user.findUnique({
 		where: { email : req.body.email},

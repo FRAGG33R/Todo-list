@@ -1,27 +1,19 @@
 import App from "./App";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
-import { IconCalendarEvent, IconPlus, IconX } from "@tabler/icons-react";
+import { IconPlus, IconX } from "@tabler/icons-react";
 import axios from "axios";
 import Modal from "./Modal";
 import { withAuthenticationRequired } from "@auth0/auth0-react";
-import toast, { Toaster } from "react-hot-toast";
 import DropDown from "./DropDown";
 import { useNavigate } from "react-router-dom";
-const notify = () =>
-  toast.error("Oops! That name already exists.", {
-    style: {
-      borderRadius: "50px",
-      color: "#1c5d51",
-    },
-  });
 
 export default withAuthenticationRequired(SideBar, {
   onRedirecting: () => <Redirect />,
 });
 
 function Redirect() {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { isAuthenticated } = useAuth0();
   useEffect(() => {
     const id = setTimeout(() => {
       if (!isAuthenticated) window.location.href = "/";
@@ -35,7 +27,6 @@ function Redirect() {
 
 function SideBar() {
   const { user, isAuthenticated, isLoading } = useAuth0();
-  const navigate = useNavigate();
   const [toDos, setToDos] = useState([]);
   const [open, setOpen] = useState(false);
   const [displayedTasks, setDisplayedTasks] = useState(0);
@@ -114,7 +105,6 @@ function SideBar() {
                 alt=""
               />
               {open && <button
-			  	className=""
 				onClick={() => {
 					setOpen(false);
 				}}>
@@ -126,6 +116,7 @@ function SideBar() {
                 toDos.map((item) => (
                   <li onClick={() => {
 					setDisplayedTasks(item.id);
+					console.log("U clicked on item number ", item.id);
 				  }}>
                     <DropDown
                       name={

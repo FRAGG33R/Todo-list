@@ -81,7 +81,7 @@ export default function Example(props) {
                       <input
                         type="text"
                         id="name"
-                        className="bg-gray-50 border border-green-900 text-gray-900 text-sm rounded-full focus:ring-[#1c5d51] focus:border-[#1c5d51] block w-10/12 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#1c5d51] dark:focus:border-[#1c5d51]"
+                        className="ml-3 bg-gray-50 border border-green-900 text-gray-900 text-sm rounded-full focus:ring-[#1c5d51] focus:border-[#1c5d51] block w-10/12 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#1c5d51] dark:focus:border-[#1c5d51]"
                         placeholder="Todo list name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}

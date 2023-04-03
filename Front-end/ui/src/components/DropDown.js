@@ -18,7 +18,6 @@ function removeTodo(id, setToDos, email) {
 	.catch(function () {
 	  console.log("Network error");
 	});
-	// console.log(res);
   })
   .catch(function (res) {
     console.log("Network error");
@@ -26,7 +25,7 @@ function removeTodo(id, setToDos, email) {
 }
 
 window.oncontextmenu = function (e) {
-  e.preventDefault();
+//   e.preventDefault(); 	
   const openDropdowns = document.querySelectorAll(
     "[data-te-dropdown-menu-ref]:not(.hidden)"
   );
