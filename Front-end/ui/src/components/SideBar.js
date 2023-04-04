@@ -122,6 +122,7 @@ function SideBar() {
 					key={item.id}
 					onClick={() => {
 					setDisplayedTasks(item.id);
+					console.log("you click ", item.id);
 				  }}>
                     <DropDown
                       name={

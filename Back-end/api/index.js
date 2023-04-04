@@ -4,7 +4,6 @@ const prisma = new PrismaClient();
 import bodyParser from 'body-parser'
 const app = express();
 import cors from 'cors';
-import { Console } from 'console';
 
 app.use(bodyParser.json());
 
@@ -18,6 +17,7 @@ app.use(cors(corsOptions))
 app.post('/app/list', async (req, res) => {
 	const taskContent = req.body.inputValue;
 	const todoId = req.body.id;
+	console.log(`content : ${taskContent}, id : ${todoId}`)
 	if (taskContent.length > 0 && todoId)
 	{
 		try {
@@ -31,13 +31,17 @@ app.post('/app/list', async (req, res) => {
 			res.status(200).send("successfully");
 		}
 		catch (error) {
+			console.log("error number 1");
 			res.status(400).send("failed");
 		}
 	}
+	console.log("I should do nothing !")
+	res.status(404).send("Something missed !");
   });
 
 app.get('/app/list', async (req, res) => {
 	const Id = req.query.id;
+	console.log(`id : ${Id}`);
 	if (Id > 0)
 	{
 		try {
@@ -46,16 +50,17 @@ app.get('/app/list', async (req, res) => {
 			})
 			if (todo)
 			{
-				// console.log(todo.tasks);
 				console.log(todo);
 				res.status(200).send(todo.tasks);
 			}
 			else
 			{
-				res.send(null);
+				console.log("error number 2")
+				res.status(200).send(null);
 			}
 		}
 		catch (error) {
+			console.log("error number 3")
 			console.log(error);
 		}
 	}

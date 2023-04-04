@@ -53,7 +53,6 @@ export default function App(props) {
 			notify();
       })
       .catch(function () {
-        console.log("crash");
       });
   };
   return (
