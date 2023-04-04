@@ -8,6 +8,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PageNotFound from "./components/404";
 import SideBar from "./components/SideBar";
 import * as te from 'tw-elements';
+import App from "./components/App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -20,9 +21,10 @@ root.render(
     >
 	<BrowserRouter>
 		<Routes>
-		<Route exact path="/" element={<LandingPage />}></Route>
+		{/* <Route exact path="/" element={<LandingPage />}></Route>
 		<Route path="/app" element={<SideBar />}></Route>
-		<Route path="*" element={<PageNotFound />}></Route>
+		<Route path="*" element={<PageNotFound />}></Route> */}
+			<Route path="/" element={<App />}></Route>
 		</Routes>
 	</BrowserRouter>
 	</Auth0Provider>

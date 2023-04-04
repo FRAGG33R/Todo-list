@@ -29,7 +29,6 @@ app.use(cors(corsOptions))
 // 	res.json(task);
 //   });
 
-
 app.get('/app/list', async (req, res) => {
 	const Id = req.query.id;
 	if (Id > 0)
@@ -40,7 +39,8 @@ app.get('/app/list', async (req, res) => {
 			})
 			if (todo)
 			{
-				console.log(todo.tasks);
+				// console.log(todo.tasks);
+				console.log(todo);
 				res.status(200).send(todo.tasks);
 			}
 			else
