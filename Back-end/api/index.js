@@ -20,7 +20,8 @@ app.post('/app/list', async (req, res) => {
 	console.log(`content : ${taskContent}, id : ${todoId}`)
 	if (taskContent.length > 0 && todoId)
 	{
-		try {
+		try
+		{
 			const task = await prisma.task.create({
 				data: {
 					content : taskContent,
@@ -35,8 +36,11 @@ app.post('/app/list', async (req, res) => {
 			res.status(400).send("failed");
 		}
 	}
-	console.log("I should do nothing !")
-	res.status(404).send("Something missed !");
+	else
+	{
+		console.log("I should do nothing !")
+		res.status(404).send("Something missed !");
+	}
   });
 
 app.get('/app/list', async (req, res) => {
