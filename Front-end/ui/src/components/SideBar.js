@@ -36,9 +36,9 @@ function SideBar() {
     state: false,
     button: "Add",
   });
-  useEffect(() => {
-    if (!isLoading && isAuthenticated) {
-      axios
+  const fetching = async () => 
+  {
+	await axios
         .post("http://localhost:3001/app", {
           name: user.nickname,
           email: user.email,
@@ -47,7 +47,7 @@ function SideBar() {
         .catch(function () {
           console.log("Network error");
         });
-      axios
+      await axios
         .post("http://localhost:3001/app/todos", {
           email: user.email,
         })
@@ -57,6 +57,10 @@ function SideBar() {
         .catch(function () {
           console.log("Network error");
         });
+  }
+  useEffect( () => {
+    if (!isLoading && isAuthenticated) {
+		fetching()
     }
   }, [isAuthenticated]);
 
@@ -114,7 +118,9 @@ function SideBar() {
             <ul className="flex pl-3 flex-col space-y-4 py-4 w-full">
               {toDos.length > 0 &&
                 toDos.map((item) => (
-                  <li onClick={() => {
+                  <li 
+					key={item.id}
+					onClick={() => {
 					setDisplayedTasks(item.id);
 				  }}>
                     <DropDown

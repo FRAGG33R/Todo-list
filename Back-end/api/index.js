@@ -76,10 +76,10 @@ app.post('/app/todos',  async (req, res) => {
 			if (Todos)
 				res.status(200).send(Todos);
 			else
-				res.status(400).send(null);
+				res.status(200).send("Empty todo list");
 		}
 		else
-			res.status(400).send(null);
+			res.status(200).send("User not found");
 
 	}
 	catch (error) {
