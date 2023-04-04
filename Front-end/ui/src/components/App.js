@@ -3,6 +3,7 @@ import { IconPlus } from "@tabler/icons-react";
 import axios from "axios";
 export default function App(props) {
   const [inputValue, setInputValue] = useState("");
+
   //   useEffect(() => {
   //     console.log("useEffect are executer again !");
   //     axios
@@ -21,16 +22,19 @@ export default function App(props) {
 
   const submitForm = (event) => {
     event.preventDefault();
-    console.log("form submitted successfuly !");
-    console.log(inputValue);
-    // axios
-    //   .post("http://localhost:3001/app/list", { inputValue })
-    //   .then(function (res) {
-    //     console.log(res);
-    //   })
-    //   .catch(function (err) {
-    //     console.log("crash");
-    //   });
+    axios
+      .post("http://localhost:3001/app/list", { inputValue, id : props.id })
+      .then(function (res) {
+		if (res.status === 200)
+		{
+			console.log("successfuly");
+			//send notification
+
+		}
+      })
+      .catch(function () {
+        console.log("crash");
+      });
   };
   return (
     <div className="w-screen h-screen flex items-end justify-center bg-[#85ceb9] font-rubik">

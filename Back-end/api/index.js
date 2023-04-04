@@ -15,19 +15,27 @@ var corsOptions = {
 
 app.use(cors(corsOptions))
 
-// app.post('/todos/:todoId/tasks', async (req, res) => {
-// 	const { todoId } = req.params;
-// 	const { content } = req.body;
-  
-// 	const task = await prisma.task.create({
-// 	  data: {
-// 		content,
-// 		todo: { connect: { id: parseInt(todoId) } },
-// 	  },
-// 	});
-  
-// 	res.json(task);
-//   });
+app.post('/app/list', async (req, res) => {
+	const taskContent = req.body.inputValue;
+	const todoId = req.body.id;
+	console.log(taskContent, todoId);
+	if (taskContent.length > 0 && todoId)
+	{
+		try {
+			const task = await prisma.task.create({
+				data: {
+					content : taskContent,
+					todo: { connect: { id: parseInt(todoId) } },
+				},
+			});
+			console.log(task);
+			res.status(200).send("successfully");
+		}
+		catch (error) {
+			res.status(400).send("failed");
+		}
+	}
+  });
 
 app.get('/app/list', async (req, res) => {
 	const Id = req.query.id;
@@ -55,20 +63,30 @@ app.get('/app/list', async (req, res) => {
 })
 
 app.post('/app/todos',  async (req, res) => {
-	const user = await prisma.user.findUnique({
-		where: { email : req.body.email},
-	});
-	if (user)
-	{
-		const Todos = await prisma.todo.findMany({
-			where: {
-				userId : user.id
-			},
+	try {
+		const user = await prisma.user.findUnique({
+			where: { email : req.body.email},
 		});
-		res.status(200).send(Todos);
+		if (user)
+		{
+			const Todos = await prisma.todo.findMany({
+				where: {
+					userId : user.id
+				},
+			});
+			if (Todos)
+				res.status(200).send(Todos);
+			else
+				res.status(400).send(null);
+		}
+		else
+			res.status(400).send(null);
+
 	}
-	else
-		res.send(null);
+	catch (error) {
+		console.log("crash");
+	}
+	
 })
 
 app.delete('/app', async (req, res) => {
@@ -83,6 +101,7 @@ app.delete('/app', async (req, res) => {
 	}
 	catch(err)
 	{
+		res.status(400).send(null);
 		console.log("error has been occurred", err);
 	}
 })
@@ -103,25 +122,33 @@ app.post('/', async (req, res) => {
 	}
 	catch(err)
 	{
+		res.status(400).send(null);
 		console.log("error has been occurred", err);
 	}
 });
 
 app.post('/app', async (req, res) => {
-	const existingUser = await prisma.user.findUnique({
-		where: { email: req.body.email }
-	  });
-	if (!existingUser)
-	{
-		const user = await prisma.user.create (
-			{
-				data : {
-					email: req.body.email,
-					name : req.body.name,
+	try {
+		const existingUser = await prisma.user.findUnique({
+			where: { email: req.body.email }
+		  });
+		if (!existingUser)
+		{
+			const user = await prisma.user.create (
+				{
+					data : {
+						email: req.body.email,
+						name : req.body.name,
+					}
 				}
-			}
-		)
+			)
+		}
+		res.status(200).send("successfully");
 	}
+	catch (error) {
+		res.status(400).send(null)
+	}
+	
 });
 
 app.listen(3001);

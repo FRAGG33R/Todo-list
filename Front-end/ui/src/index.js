@@ -21,10 +21,10 @@ root.render(
     >
 	<BrowserRouter>
 		<Routes>
-		{/* <Route exact path="/" element={<LandingPage />}></Route>
+		<Route exact path="/" element={<LandingPage />}></Route>
 		<Route path="/app" element={<SideBar />}></Route>
-		<Route path="*" element={<PageNotFound />}></Route> */}
-			<Route path="/" element={<App />}></Route>
+		<Route path="*" element={<PageNotFound />}></Route>
+			{/* <Route path="/" element={<App />}></Route> */}
 		</Routes>
 	</BrowserRouter>
 	</Auth0Provider>
