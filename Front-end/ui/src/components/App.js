@@ -71,15 +71,72 @@ export default function App(props) {
       })
       .catch(function () {
         setError(true);
-		errorNofity();
+        errorNofity();
       });
-	  setInputValue("")
+    setInputValue("");
   };
   return (
-    <div className="w-screen h-screen flex items-end justify-center bg-[#85ceb9] font-rubik">
+    <div className="w-screen h-screen flex flex-col items-center xs:space-y-6 md:space-y-16 justify-end bg-[#85ceb9] font-rubik">
       <Toaster />
-      <div className="w-full flex justify-center pb-6">
-        <form className="relative w-9/12" onSubmit={submitForm}>
+      <div className="xs:w-11/12 md:w-9/12 h-[80vh] overflow-y-scroll flex items-center justify-center">
+        <ul className="space-y-4 h-full">
+          {testTodos.map((item) => (
+            <li>
+              <div class="bg-gray-800 text-white w-full max-w-md flex flex-col rounded-xl shadow-lg p-4">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center space-x-4">
+                    <div class="rounded-full w-4 h-4 border border-purple-500"></div>
+                    <div class="text-md font-bold">{item.content}</div>
+                  </div>
+                  <div class="flex items-center space-x-4">
+                    <div class="cursor-pointer">
+                      <img
+                        class="w-5 h-5 rounded-lg"
+                        src="https://i.pravatar.cc/300"
+                      />
+                    </div>
+                    <div class="text-gray-500 hover:text-gray-300 cursor-pointer">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                        />
+                      </svg>
+                    </div>
+                    <div class="text-gray-500 hover:text-gray-300 cursor-pointer">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-4 text-gray-500 font-bold text-sm"># TODO</div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="w-full flex justify-center pb-6 ">
+        <form className="relative xs:w-11/12 md:w-9/12" onSubmit={submitForm}>
           <input
             type="text"
             value={inputValue}
@@ -87,7 +144,7 @@ export default function App(props) {
             placeholder="Add Task"
             className={
               error == true
-                ? "w-full border-[2.4px] bg-transparent shadow-lg shadow-[#5d8a7f] border-[#FF4B4B] rounded-lg py-2 pl-9 placeholder-[#1c5d51] text-gray-900 focus:border-[#FF4B4B] focus:ring-0"
+                ? "w-full border-[2.4px] bg-transparent shadow-lg shadow-[#5d8a7f] border-[#FF4B4B] rounded-lg py-2 pl-9 placeholder-[#FF4B4B] text-gray-900 focus:border-[#FF4B4B] focus:ring-0"
                 : "w-full border-[2.4px] bg-transparent shadow-lg shadow-[#5d8a7f] border-[#1c5d51] rounded-lg py-2 pl-9 placeholder-[#1c5d51] text-gray-900 focus:border-[#1c5d51]  focus:ring-0"
             }
           />
