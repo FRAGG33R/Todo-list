@@ -55,7 +55,7 @@ export default function DropDown(props) {
       <div>
         <div className="relative" data-te-dropdown-ref>
           <button
-            className="flex items-center whitespace-nowrap rounded-0 px-2 pt-2.5 pb-2 text-[15px] font-medium  text-white"
+            className="flex items-center whitespace-nowrap rounded-0 px-2 pt-2.5 pb-2 text-[15px] font-normal tracking-widest text-white"
             type="button"
             id="dropdownMenuButton1"
             aria-expanded="false"

@@ -79,7 +79,7 @@ function SideBar() {
     <div>
       <div className=" h-screen flex flex-row bg-[#85ceb9] font-rubik tracking-wider">
         {!open && <button
-          className="h-12 w-12 px-2 inline-flex items-center justify-center py-2 text-base font-medium leading-6 text-gray-700 whitespace-no-wrap focus:outline-none focus:shadow-none"
+          className="h-12 w-12 px-2 inline-flex items-center justify-center py-2 text-base font-normal leading-6 text-gray-700 whitespace-no-wrap focus:outline-none focus:shadow-none"
           onClick={() => {
             if (!open) setOpen(true);
             else setOpen(false);
@@ -115,14 +115,13 @@ function SideBar() {
                 <IconX color="white" />
               </button>}
             </div>
-            <ul className="flex pl-3 flex-col space-y-4 py-4 w-full">
+            <ul className="flex pl-3 flex-col space-y-4 py-4 w-full ">
               {toDos.length > 0 &&
                 toDos.map((item) => (
                   <li 
 					key={item.id}
 					onClick={() => {
 					setDisplayedTasks(item.id);
-					console.log("you click ", item.id);
 				  }}>
                     <DropDown
                       name={
@@ -148,7 +147,7 @@ function SideBar() {
                   });
                 }}
                 href="#_"
-                className="self-center flex items-center justify-center w-[40px] h-[40px] font-medium bg-[#113932] hover:bg-[#1a5047] rounded-full "
+                className="self-center flex items-center justify-center w-[40px] h-[40px] font-normal bg-[#113932] hover:bg-[#1a5047] rounded-full "
               >
                 <IconPlus color="white" />
               </button>
@@ -163,7 +162,7 @@ function SideBar() {
             />
           </div>
         )}
-        <App id={displayedTasks}/>
+        <App image={user?.picture} id={displayedTasks}/>
       </div>
     </div>
   );

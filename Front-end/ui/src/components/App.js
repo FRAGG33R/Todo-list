@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { IconPlus } from "@tabler/icons-react";
+import { IconPlus, IconPin  } from "@tabler/icons-react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
 export default function App(props) {
   const [inputValue, setInputValue] = useState("");
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(false); 
+
   const testTodos = [
     { content: "Lorem ipsum dolor sit amet" },
     { content: "Consectetur adipiscing elit" },
@@ -18,6 +19,7 @@ export default function App(props) {
     { content: "Voluptate velit esse cillum dolore" },
     { content: "Eu fugiat nulla pariatur" },
   ];
+
   const success = () =>
     toast("One more thing to do!", {
       duration: 1400,
@@ -76,56 +78,29 @@ export default function App(props) {
     setInputValue("");
   };
   return (
-    <div className="w-screen h-screen flex flex-col items-center xs:space-y-6 md:space-y-16 justify-end bg-[#85ceb9] font-rubik">
+    <div className="w-screen h-screen flex flex-col items-center xs:space-y-6 md:space-y-16 justify-end bg-[#85ceb9] font-rubik font-normal tracking-widest">
       <Toaster />
-      <div className="xs:w-11/12 md:w-9/12 h-[80vh] overflow-y-scroll flex items-center justify-center">
-        <ul className="space-y-4 h-full">
+      <div className="xs:w-10/12 md:w-7/12 h-[80vh] overflow-y-scroll scrollbar-thin scrollbar-thumb-[#16433a] scrollbar-track-[#1d5d51] scrollbar-thumb-rounded-full scrollbar-track-rounded-full ">
+        <ul className="space-y-4 h-full w-full">
           {testTodos.map((item) => (
-            <li>
-              <div class="bg-gray-800 text-white w-full max-w-md flex flex-col rounded-xl shadow-lg p-4">
+            <li className="w-full flex justify-center">
+              <div
+			  	class="bg-[#16433a] text-white w-10/12 flex flex-col rounded-xl shadow-lg p-4"
+			>
                 <div class="flex items-center justify-between">
                   <div class="flex items-center space-x-4">
                     <div class="rounded-full w-4 h-4 border border-purple-500"></div>
-                    <div class="text-md font-bold">{item.content}</div>
+                    <div class="text-md">{item.content}</div>
                   </div>
                   <div class="flex items-center space-x-4">
                     <div class="cursor-pointer">
                       <img
                         class="w-5 h-5 rounded-lg"
-                        src="https://i.pravatar.cc/300"
+                        src={props.image}
                       />
                     </div>
                     <div class="text-gray-500 hover:text-gray-300 cursor-pointer">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-5 w-5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
-                        />
-                      </svg>
-                    </div>
-                    <div class="text-gray-500 hover:text-gray-300 cursor-pointer">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-5 w-5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"
-                        />
-                      </svg>
+                      <IconPin />
                     </div>
                   </div>
                 </div>
@@ -136,7 +111,7 @@ export default function App(props) {
         </ul>
       </div>
       <div className="w-full flex justify-center pb-6 ">
-        <form className="relative xs:w-11/12 md:w-9/12" onSubmit={submitForm}>
+        <form className="relative xs:w-11/12 md:w-7/12" onSubmit={submitForm}>
           <input
             type="text"
             value={inputValue}
