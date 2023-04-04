@@ -116,7 +116,6 @@ function SideBar() {
                 toDos.map((item) => (
                   <li onClick={() => {
 					setDisplayedTasks(item.id);
-					console.log("U clicked on item number ", item.id);
 				  }}>
                     <DropDown
                       name={

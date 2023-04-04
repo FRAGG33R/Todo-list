@@ -18,7 +18,6 @@ app.use(cors(corsOptions))
 app.post('/app/list', async (req, res) => {
 	const taskContent = req.body.inputValue;
 	const todoId = req.body.id;
-	console.log(taskContent, todoId);
 	if (taskContent.length > 0 && todoId)
 	{
 		try {
