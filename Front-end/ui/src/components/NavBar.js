@@ -1,4 +1,4 @@
-import Logo1 from "../assets/logo.png";
+import Logo1 from "../assets/logo-r.png";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export default function NavBar() {

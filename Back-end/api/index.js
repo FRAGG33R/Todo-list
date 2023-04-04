@@ -32,7 +32,6 @@ app.post('/app/list', async (req, res) => {
 			res.status(200).send("successfully");
 		}
 		catch (error) {
-			console.log("error number 1");
 			res.status(400).send("failed");
 		}
 	}
