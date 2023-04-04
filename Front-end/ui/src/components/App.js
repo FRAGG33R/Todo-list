@@ -83,16 +83,16 @@ export default function App(props) {
       <div className="xs:w-10/12 md:w-7/12 h-[80vh] overflow-y-scroll scrollbar-thin scrollbar-thumb-[#16433a] scrollbar-track-[#1d5d51] scrollbar-thumb-rounded-full scrollbar-track-rounded-full ">
         <ul className="space-y-4 h-full w-full">
           {testTodos.map((item) => (
-            <li className="w-full flex justify-center">
+            <li className="w-full flex justify-start">
               <div
 			  	class="bg-[#16433a] text-white w-10/12 flex flex-col rounded-xl shadow-lg p-4"
 			>
                 <div class="flex items-center justify-between">
                   <div class="flex items-center space-x-4">
                     <div class="rounded-full w-4 h-4 border border-purple-500"></div>
-                    <div class="text-md">{item.content}</div>
+                    <div class="text-md w-11/12">{item.content}</div>
                   </div>
-                  <div class="flex items-center space-x-4">
+                  <div class="flex items-center space-x-4  w-[6vw]">
                     <div class="cursor-pointer">
                       <img
                         class="w-5 h-5 rounded-lg"
