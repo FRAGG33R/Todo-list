@@ -73,6 +73,7 @@ export default function App(props) {
         setError(true);
 		errorNofity();
       });
+	  setInputValue("")
   };
   return (
     <div className="w-screen h-screen flex items-end justify-center bg-[#85ceb9] font-rubik">
