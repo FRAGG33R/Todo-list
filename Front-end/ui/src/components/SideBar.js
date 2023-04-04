@@ -83,7 +83,7 @@ function SideBar() {
         >
           {" "}
           <svg
-            class="w-8 h-8"
+            className="w-8 h-8"
             aria-hidden="true"
             fill="currentColor"
             viewBox="0 0 20 20"
