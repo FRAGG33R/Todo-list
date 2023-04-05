@@ -17,7 +17,6 @@ app.use(cors(corsOptions))
 app.post('/app/list', async (req, res) => {
 	const taskContent = req.body.inputValue;
 	const todoId = req.body.id;
-	console.log(`content : ${taskContent}, id : ${todoId}`)
 	if (taskContent.length > 0 && todoId)
 	{
 		try
@@ -43,27 +42,18 @@ app.post('/app/list', async (req, res) => {
   });
 
 app.get('/app/list', async (req, res) => {
-	const Id = req.query.id;
-	console.log(`id : ${Id}`);
+	const Id = parseInt(req.query.id);
 	if (Id > 0)
 	{
 		try {
-			const todo = await prisma.todo.findUnique({
-				where : {id : Id},
-			})
-			if (todo)
-			{
-				console.log(todo);
-				res.status(200).send(todo.tasks);
-			}
-			else
-			{
-				console.log("error number 2")
-				res.status(200).send(null);
-			}
+			const tasks = await prisma.task.findMany({
+				where: { todoId : Id },
+				});
+				console.log(tasks);
+			res.status(200).send(tasks);
 		}
 		catch (error) {
-			console.log("error number 3")
+			console.log("error code 3")
 			console.log(error);
 		}
 	}
