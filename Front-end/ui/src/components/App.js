@@ -6,7 +6,7 @@ import toast, { Toaster } from "react-hot-toast";
 export default function App(props) {
   const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState(false);
-  const [tasks, setTasks] = useState([]);
+//   const [tasks, setTasks] = useState([]);
 
   const success = () =>
     toast("One more thing to do!", {
@@ -35,7 +35,7 @@ const fetchTasks = async () => {
 	await axios
 	.get("http://localhost:3001/app/list", { params: { id: props.id } })
 	.then(function (res) {
-	  setTasks(res.data);
+	  props.setTasks(res.data);
 	})
 	.catch(function () {
 	  console.log("crash");
@@ -73,7 +73,7 @@ const fetchTasks = async () => {
       <Toaster />
       <div  className="xs:w-10/12 md:w-7/12 h-[80vh] overflow-y-scroll scrollbar-thin scrollbar-thumb-[#16433a] scrollbar-track-[#1d5d51] scrollbar-thumb-rounded-full scrollbar-track-rounded-full ">
         <ul className="space-y-4 h-full w-full">
-          {tasks.map((item) => (
+          {props.tasks.map((item) => (
             <li key={item.id} className="w-full flex justify-start">
               <div class="bg-[#16433a] text-white w-10/12 flex flex-col rounded-xl shadow-lg p-4">
                 <div class="flex items-center justify-between">

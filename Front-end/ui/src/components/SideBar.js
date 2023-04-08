@@ -29,37 +29,38 @@ function SideBar() {
   const [toDos, setToDos] = useState([]);
   const [open, setOpen] = useState(false);
   const [displayedTasks, setDisplayedTasks] = useState(0);
+  const [tasks, setTasks] = useState([]);
+
   const [modal, setModal] = useState({
     title: "Create To-do list",
     description: "Create To-do list",
     state: false,
     button: "Add",
   });
-  const fetching = async () => 
-  {
-	await axios
-        .post("http://localhost:3001/app", {
-          name: user.nickname,
-          email: user.email,
-        })
-        .then(function (res) {})
-        .catch(function () {
-          console.log("Network error");
-        });
-      await axios
-        .post("http://localhost:3001/app/todos", {
-          email: user.email,
-        })
-        .then(function (res) {
-          setToDos(res.data);
-        })
-        .catch(function () {
-          console.log("Network error");
-        });
-  }
-  useEffect( () => {
+  const fetching = async () => {
+    await axios
+      .post("http://localhost:3001/app", {
+        name: user.nickname,
+        email: user.email,
+      })
+      .then(function (res) {})
+      .catch(function () {
+        console.log("Network error");
+      });
+    await axios
+      .post("http://localhost:3001/app/todos", {
+        email: user.email,
+      })
+      .then(function (res) {
+        setToDos(res.data);
+      })
+      .catch(function () {
+        console.log("Network error");
+      });
+  };
+  useEffect(() => {
     if (!isLoading && isAuthenticated) {
-		fetching()
+      fetching();
     }
   }, [isAuthenticated]);
 
@@ -77,53 +78,66 @@ function SideBar() {
   return (
     <div>
       <div className=" h-screen flex flex-row bg-[#85ceb9] font-rubik tracking-wider">
-        {!open && <button
-          className="h-12 w-12 px-2 inline-flex items-center justify-center py-2 text-base font-normal leading-6 text-gray-700 whitespace-no-wrap focus:outline-none focus:shadow-none"
-          onClick={() => {
-            if (!open) setOpen(true);
-            else setOpen(false);
-          }}
-        >
-          {" "}
-          <svg
-            className="w-8 h-8"
-            aria-hidden="true"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
+        {!open && (
+          <button
+            className="h-12 w-12 px-2 inline-flex items-center justify-center py-2 text-base font-normal leading-6 text-gray-700 whitespace-no-wrap focus:outline-none focus:shadow-none"
+            onClick={() => {
+              if (!open) setOpen(true);
+              else setOpen(false);
+            }}
           >
-            <path
-              fillRule="evenodd"
-              d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-              clipRule="evenodd"
-            ></path>
-          </svg>
-        </button>}
+            {" "}
+            <svg
+              className="w-8 h-8"
+              aria-hidden="true"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                clipRule="evenodd"
+              ></path>
+            </svg>
+          </button>
+        )}
         {open && (
           <div className=" flex flex-col w-72 overflow-scroll overflow-x-hidden scrollbar-thin scrollbar-thumb-[#16433a] scrollbar-track-[#1d5d51] overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full drop-shadow-2xl bg-[#1c5d51] rounded-br-xl rounded-tr-xl">
-            <div className="w-full flex items-center flex-wrap justify-between px-4 pt-2 ">
+            <div className="w-full flex items-center flex-wrap justify-between px-4 pt-2">
               <img
                 className="w-10 h-10 rounded-full border-2 border-white"
                 src={user?.picture}
                 alt=""
               />
-			  <div className="font-rubik text-white tracking-wider">{`Hi, ${user.nickname < 6 ? user.nickname : user.nickname.substring(0, 6) + "..."} 👋`}</div>
-              {open && <button
-				onClick={() => {
-					setOpen(false);
-				}}>
-                <IconX color="white" />
-              </button>}
+              <div className="font-rubik tracking-wider text-white pt-1">{`Hi, ${
+                user.nickname < 6
+                  ? user.nickname
+                  : user.nickname.substring(0, 6) + "..."
+              } 👋`}</div>
+              {open && (
+                <button
+                  className="text-white hover:text-white/80 pt-1"
+                  onClick={() => {
+                    setOpen(false);
+                  }}
+                >
+                  <IconX />
+                </button>
+              )}
             </div>
             <ul className="flex pl-3 flex-col space-y-4 py-4 w-full ">
               {toDos.length > 0 &&
                 toDos.map((item) => (
                   <li
-					key={item.id}
-					onClick={() => {
-					setDisplayedTasks(item.id);
-				  }}>
+                    key={item.id}
+                    onClick={() => {
+                      setDisplayedTasks(item.id);
+                    }}
+                  >
                     <DropDown
+						tasks={tasks}
+						setTasks={setTasks}
                       name={
                         item.name.length < 13
                           ? item.name
@@ -162,7 +176,7 @@ function SideBar() {
             />
           </div>
         )}
-        <App image={user?.picture} id={displayedTasks}/>
+        <App image={user?.picture} id={displayedTasks} tasks={tasks} setTasks={setTasks} />
       </div>
     </div>
   );

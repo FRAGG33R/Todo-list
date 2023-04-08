@@ -1,31 +1,8 @@
 import { IconCalendarEvent } from "@tabler/icons-react";
 import axios from "axios";
 
-function removeTodo(id, setToDos, email) {
-	console.log(id);
-  	axios.delete("http://localhost:3001/app", {
-	data: {
-		id: id
-	  }
-  })
-  .then(function (res){
-	axios.post("http://localhost:3001/app/todos", {
-	  email: email,
-	})
-	.then(function (res) {
-	  setToDos(res.data);
-	})
-	.catch(function () {
-	  console.log("Network error");
-	});
-  })
-  .catch(function (res) {
-    console.log("Network error");
-  });
-}
-
 window.oncontextmenu = function (e) {
-//   e.preventDefault(); 	
+  //   e.preventDefault();
   const openDropdowns = document.querySelectorAll(
     "[data-te-dropdown-menu-ref]:not(.hidden)"
   );
@@ -50,6 +27,40 @@ window.addEventListener("click", function (e) {
 });
 
 export default function DropDown(props) {
+  const updateData =  () => {
+    axios
+      .post("http://localhost:3001/app/todos", {
+        email: props.email,
+      })
+      .then(function (res) {
+        props.setToDos(res.data);
+      })
+      .catch(function () {
+        console.log("Network error");
+      });
+     axios
+      .get("http://localhost:3001/app/list", { params: { id: props.id } })
+      .then(function (res) {
+        props.setTasks(res.data);
+      })
+      .catch(function () {
+        console.log("crash");
+      });
+  };
+  function removeTodo(id) {
+    axios
+      .delete("http://localhost:3001/app", {
+        data: {
+          id: id,
+        },
+      })
+      .then(() => {
+        updateData();
+      })
+      .catch(function (res) {
+        console.log("Network error");
+      });
+  }
   return (
     <div className="flex justify-start items-center w-full">
       <div className="w-full ">
@@ -66,9 +77,7 @@ export default function DropDown(props) {
               color="white"
               strokeWidth="2"
             />
-			<div className="w-10/12 text-left">
-            	{props.name}
-			</div>
+            <div className="w-10/12 text-left">{props.name}</div>
           </button>
           <ul
             className="absolute z-[1000] float-right mt-2 hidden w-10/12 list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block"
@@ -81,8 +90,8 @@ export default function DropDown(props) {
                 href="#"
                 data-te-dropdown-item-ref
                 onClick={() => {
-					removeTodo(props.id, props.setToDos, props.email);
-				}}
+                  removeTodo(props.id, props.setToDos, props.email);
+                }}
               >
                 Delete
               </button>
