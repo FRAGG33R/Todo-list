@@ -31,18 +31,18 @@ export default function App(props) {
         color: "#fff",
       },
     });
-
+const fetchTasks = async () => {
+	await axios
+	.get("http://localhost:3001/app/list", { params: { id: props.id } })
+	.then(function (res) {
+	  setTasks(res.data);
+	})
+	.catch(function () {
+	  console.log("crash");
+	});
+}
   useEffect(() => {
-    console.log("useEffect are executer!");
-    axios
-      .get("http://localhost:3001/app/list", { params: { id: props.id } })
-      .then(function (res) {
-        console.log(res.data);
-        setTasks(res.data);
-      })
-      .catch(function (err) {
-        console.log("crash");
-      });
+    fetchTasks();
   }, [props.id]);
 
   const changeForm = (event) => {
@@ -58,6 +58,8 @@ export default function App(props) {
         if (res.status === 200) {
           setError(false);
           success();
+		  //here
+			fetchTasks();
         }
       })
       .catch(function () {
@@ -69,7 +71,7 @@ export default function App(props) {
   return (
     <div className="w-screen h-screen flex flex-col items-center xs:space-y-6 md:space-y-16 justify-end bg-[#85ceb9] font-rubik font-normal tracking-widest">
       <Toaster />
-      <div className="xs:w-10/12 md:w-7/12 h-[80vh] overflow-y-scroll scrollbar-thin scrollbar-thumb-[#16433a] scrollbar-track-[#1d5d51] scrollbar-thumb-rounded-full scrollbar-track-rounded-full ">
+      <div  className="xs:w-10/12 md:w-7/12 h-[80vh] overflow-y-scroll scrollbar-thin scrollbar-thumb-[#16433a] scrollbar-track-[#1d5d51] scrollbar-thumb-rounded-full scrollbar-track-rounded-full ">
         <ul className="space-y-4 h-full w-full">
           {tasks.map((item) => (
             <li key={item.id} className="w-full flex justify-start">
