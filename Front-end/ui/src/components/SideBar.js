@@ -6,7 +6,6 @@ import axios from "axios";
 import Modal from "./Modal";
 import { withAuthenticationRequired } from "@auth0/auth0-react";
 import DropDown from "./DropDown";
-import { useNavigate } from "react-router-dom";
 
 export default withAuthenticationRequired(SideBar, {
   onRedirecting: () => <Redirect />,
@@ -101,13 +100,14 @@ function SideBar() {
           </svg>
         </button>}
         {open && (
-          <div className=" flex flex-col w-72 overflow-scroll overflow-x-hidden  scrollbar-thin scrollbar-thumb-[#16433a] scrollbar-track-[#1d5d51] overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full  drop-shadow-2xl bg-[#1c5d51]">
-            <div className="w-full pt-4 flex items-center justify-between px-4">
+          <div className=" flex flex-col w-72 overflow-scroll overflow-x-hidden scrollbar-thin scrollbar-thumb-[#16433a] scrollbar-track-[#1d5d51] overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full drop-shadow-2xl bg-[#1c5d51] rounded-br-xl rounded-tr-xl">
+            <div className="w-full flex items-center flex-wrap justify-between px-4 pt-2 ">
               <img
-                className="w-10 h-10 rounded-full"
+                className="w-10 h-10 rounded-full border-2 border-white"
                 src={user?.picture}
                 alt=""
               />
+			  <div className="font-rubik text-white tracking-wider">{`Hi, ${user.nickname < 6 ? user.nickname : user.nickname.substring(0, 6) + "..."} 👋`}</div>
               {open && <button
 				onClick={() => {
 					setOpen(false);
@@ -118,16 +118,16 @@ function SideBar() {
             <ul className="flex pl-3 flex-col space-y-4 py-4 w-full ">
               {toDos.length > 0 &&
                 toDos.map((item) => (
-                  <li 
+                  <li
 					key={item.id}
 					onClick={() => {
 					setDisplayedTasks(item.id);
 				  }}>
                     <DropDown
                       name={
-                        item.name.length < 20
+                        item.name.length < 13
                           ? item.name
-                          : item.name.substr(0, 20) + "..."
+                          : item.name.substr(0, 13) + "..."
                       }
                       id={item.id}
                       setToDos={setToDos}

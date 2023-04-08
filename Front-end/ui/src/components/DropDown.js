@@ -51,11 +51,11 @@ window.addEventListener("click", function (e) {
 
 export default function DropDown(props) {
   return (
-    <div className="flex justify-start items-center">
-      <div>
-        <div className="relative" data-te-dropdown-ref>
+    <div className="flex justify-start items-center w-full">
+      <div className="w-full ">
+        <div className="relative w-full" data-te-dropdown-ref>
           <button
-            className="flex items-center whitespace-nowrap rounded-0 px-2 pt-2.5 pb-2 text-[15px] font-normal tracking-widest text-white"
+            className="w-10/12 flex items-center whitespace-nowrap rounded-lg border border-white px-2 pt-2.5 pb-2 text-[15px] tracking-[0.15rem] font-normal text-white hover:bg-[#277063] "
             type="button"
             id="dropdownMenuButton1"
             aria-expanded="false"
@@ -66,16 +66,18 @@ export default function DropDown(props) {
               color="white"
               strokeWidth="2"
             />
-            {props.name}
+			<div className="w-10/12 text-left">
+            	{props.name}
+			</div>
           </button>
           <ul
-            className="absolute z-[1000] float-right m-0 hidden w-full list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block"
+            className="absolute z-[1000] float-right mt-2 hidden w-10/12 list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block"
             aria-labelledby="dropdownMenuButton1"
             data-te-dropdown-menu-ref
           >
             <li>
               <button
-                className="block w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal text-[#174a41] hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600"
+                className="block w-10/12 whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal text-[#174a41] hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600"
                 href="#"
                 data-te-dropdown-item-ref
                 onClick={() => {
