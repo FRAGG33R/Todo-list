@@ -63,10 +63,10 @@ export default function DropDown(props) {
   }
   return (
     <div className="flex justify-start items-center w-full">
-      <div className="w-full ">
+      <div className="w-full">
         <div className="relative w-full" data-te-dropdown-ref>
           <button
-            className="w-10/12 flex items-center whitespace-nowrap rounded-lg border border-white px-2 pt-2.5 pb-2 text-[15px] tracking-[0.15rem] font-normal text-white hover:bg-[#277063] "
+            className="w-11/12 flex items-center whitespace-nowrap rounded-lg border border-white px-2 pt-2.5 pb-2 text-[15px] tracking-[0.15rem] font-normal text-white hover:bg-[#277063] "
             type="button"
             id="dropdownMenuButton1"
             aria-expanded="false"
@@ -80,13 +80,13 @@ export default function DropDown(props) {
             <div className="w-10/12 text-left">{props.name}</div>
           </button>
           <ul
-            className="absolute z-[1000] float-right mt-2 hidden w-10/12 list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block"
+            className="absolute z-[1000] float-right mt-2  hidden w-11/12 list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block"
             aria-labelledby="dropdownMenuButton1"
             data-te-dropdown-menu-ref
           >
-            <li>
+            <li >
               <button
-                className="block w-10/12 whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal text-[#174a41] hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600"
+                className="block  w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal text-[#174a41] hover:bg-neutral-100 active:text-neutral-800 active:no-underline"
                 href="#"
                 data-te-dropdown-item-ref
                 onClick={() => {

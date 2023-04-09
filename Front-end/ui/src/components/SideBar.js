@@ -80,7 +80,7 @@ function SideBar() {
       <div className=" h-screen flex flex-row bg-[#85ceb9] font-rubik tracking-wider">
         {!open && (
           <button
-            className="h-12 w-12 px-2 inline-flex items-center justify-center py-2 text-base font-normal leading-6 text-gray-700 whitespace-no-wrap focus:outline-none focus:shadow-none"
+            className="h-12 w-12 px-2 inline-flex items-center justify-center py-2 text-base font-normal leading-6 text-[#16433a] hover:text-[#286256] whitespace-no-wrap focus:outline-none focus:shadow-none"
             onClick={() => {
               if (!open) setOpen(true);
               else setOpen(false);
@@ -103,8 +103,8 @@ function SideBar() {
           </button>
         )}
         {open && (
-          <div className=" flex flex-col w-72 overflow-scroll overflow-x-hidden scrollbar-thin scrollbar-thumb-[#16433a] scrollbar-track-[#1d5d51] overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full drop-shadow-2xl bg-[#1c5d51] rounded-br-xl rounded-tr-xl">
-            <div className="w-full flex items-center flex-wrap justify-between px-4 pt-2">
+          <div className="fixed  z-40 flex flex-col w-64  h-full space-y-4 overflow-scroll overflow-x-hidden scrollbar-thin scrollbar-thumb-[#16433a] scrollbar-track-[#1d5d51] overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full drop-shadow-2xl bg-[#1c5d51] rounded-br-xl rounded-tr-xl">
+            <div className="w-full flex items-center justify-between flex-row px-2 pt-2">
               <img
                 className="w-10 h-10 rounded-full border-2 border-white"
                 src={user?.picture}
@@ -126,7 +126,8 @@ function SideBar() {
                 </button>
               )}
             </div>
-            <ul className="flex pl-3 flex-col space-y-4 py-4 w-full ">
+			<div className="w-full border border-white"></div>
+            <ul className="flex pl-3 flex-col space-y-4 py-4 w-full">
               {toDos.length > 0 &&
                 toDos.map((item) => (
                   <li
@@ -139,9 +140,9 @@ function SideBar() {
 						tasks={tasks}
 						setTasks={setTasks}
                       name={
-                        item.name.length < 13
+                        item.name.length < 16
                           ? item.name
-                          : item.name.substr(0, 13) + "..."
+                          : item.name.substr(0, 16) + "..."
                       }
                       id={item.id}
                       setToDos={setToDos}
@@ -176,7 +177,7 @@ function SideBar() {
             />
           </div>
         )}
-        <App image={user?.picture} id={displayedTasks} tasks={tasks} setTasks={setTasks} />
+        <App image={user?.picture} id={displayedTasks} tasks={tasks} setTasks={setTasks} Open={open}/>
       </div>
     </div>
   );
