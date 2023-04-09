@@ -100,7 +100,9 @@ export default function App(props) {
         <div className="xs:w-10/12 md:w-7/12 h-[80vh]  overflow-x-hidden overflow-y-scroll scrollbar-thin scrollbar-thumb-[#16433a] scrollbar-track-[#1d5d51] scrollbar-thumb-rounded-full scrollbar-track-rounded-full ">
 		  <Reorder.Group axis="y" values={props.tasks} onReorder={props.setTasks} className="space-y-4 h-full w-full flex justify-start flex-col">
 			{props.tasks.map((item) => (
-				<Reorder.Item key={item.id} value={item} className="w-11/12">
+				<Reorder.Item key={item.id} value={item} className="w-11/12 " initial={{ opacity: 0 }}
+				animate={{ opacity: 1}}
+				exit={{ opacity: 0 }}>
 				<div className="bg-[#16433a] text-white w-full flex flex-col rounded-xl shadow-lg p-4 hover:bg-[#10362f]">
                   <div className="flex items-center justify-between w-full">
                     <IconCircle size={22} />
