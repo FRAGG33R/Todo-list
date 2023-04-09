@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react";
-import { IconPlus, IconTrash  } from "@tabler/icons-react";
+import {
+  IconPlus,
+  IconTrash,
+  IconCircle,
+  IconCircleCheckFilled,
+} from "@tabler/icons-react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
 export default function App(props) {
   const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState(false);
+
 
   const success = () =>
     toast("One more thing to do!", {
@@ -66,28 +72,51 @@ export default function App(props) {
       });
     setInputValue("");
   };
+
+  const removeTask = (id) => {
+    console.log("id: ", id);
+    axios
+      .delete("http://localhost:3001/app/list", {
+        data: {
+          id: id,
+        },
+      })
+      .then((res) => {
+		props.setTasks(res.data);
+      })
+      .catch(() => {
+        console.log("Crash");
+      });
+  };
   return (
     <>
-	{props.Open && <div className="w-screen h-screen fixed bg-black opacity-70 z-10"></div>}
+      {props.Open && (
+        <div className="w-screen h-screen fixed bg-black opacity-80 z-10"></div>
+      )}
       <div className="w-screen h-screen flex flex-col items-center xs:space-y-6 md:space-y-16 justify-end bg-[#85ceb9] font-rubik font-normal tracking-widest">
         <Toaster />
         <div className="xs:w-10/12 md:w-7/12 h-[80vh]  overflow-x-hidden overflow-y-scroll scrollbar-thin scrollbar-thumb-[#16433a] scrollbar-track-[#1d5d51] scrollbar-thumb-rounded-full scrollbar-track-rounded-full ">
           <ul className="space-y-4 h-full w-full flex justify-start flex-col">
             {props.tasks.map((item) => (
               <li key={item.id} className="w-11/12">
-                <div class="bg-[#16433a] text-white w-full flex flex-col rounded-xl shadow-lg p-4 ">
-                  <div class="flex items-center justify-between w-full ">
-                      <div class="rounded-full w-4 h-4 border border-[#1ffed5]"></div>
-                    <div class="flex items-center space-x-4 lg:w-10/12 xs:w-8/12 overflow-hidden">
-                      <div class="text-md w-full">{item.content}</div>
+                <div className="bg-[#16433a] text-white w-full flex flex-col rounded-xl shadow-lg p-4 hover:bg-[#10362f]">
+                  <div className="flex items-center justify-between w-full">
+                    <IconCircle size={22} />
+                    <div className="flex items-center space-x-4 lg:w-10/12 xs:w-8/12 overflow-hidden">
+                      <div className="text-md w-full">{item.content}</div>
                     </div>
-                    <div class="flex items-center justify-end space-x-2">
-                      <div class="cursor-pointer">
-                        <img class="w-5 h-5 rounded-lg" src={props.image} />
+                    <div className="flex items-center justify-end space-x-2">
+                      <div className="cursor-pointer">
+                        <img className="w-5 h-5 rounded-lg" src={props.image} />
                       </div>
-                      <div class="text-gray-300 hover:text-gray-100 cursor-pointer">
-                        <IconTrash  />
-                      </div>
+                      <button
+                        onClick={() => {
+                          removeTask(item.id);
+                        }}
+                        className="flex items-center justify-center text-white cursor-pointer"
+                      >
+                        <IconTrash size={20} />
+                      </button>
                     </div>
                   </div>
                 </div>

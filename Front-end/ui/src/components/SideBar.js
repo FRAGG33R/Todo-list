@@ -76,11 +76,11 @@ function SideBar() {
     }
   }
   return (
-    <div>
-      <div className=" h-screen flex flex-row bg-[#85ceb9] font-rubik tracking-wider">
+    <div className="overflow-x-hidden">
+      <div className="h-screen flex flex-row bg-[#85ceb9] font-rubik tracking-wider">
         {!open && (
           <button
-            className="h-12 w-12 px-2 inline-flex items-center justify-center py-2 text-base font-normal leading-6 text-[#16433a] hover:text-[#286256] whitespace-no-wrap focus:outline-none focus:shadow-none"
+            className="h-12 w-12 px-2 fixed items-center justify-center py-2 text-base font-normal leading-6 text-[#16433a] hover:text-[#286256] whitespace-no-wrap focus:outline-none focus:shadow-none"
             onClick={() => {
               if (!open) setOpen(true);
               else setOpen(false);

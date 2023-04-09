@@ -14,6 +14,20 @@ var corsOptions = {
 
 app.use(cors(corsOptions));
 
+app.delete("/app/list",  async (req, res) => {
+	const Id = req.body.id;
+	try {
+		const deletedTask = await prisma.task.delete({
+			where: { id: Id },
+		})
+		const newRecord = await prisma.task.findMany();
+		res.status(200).send(newRecord);
+	}
+	catch (error) {
+		console.log("Could not remove task number ", Id)
+	}
+})
+
 app.post("/app/list", async (req, res) => {
   const taskContent = req.body.inputValue;
   const todoId = req.body.id;
@@ -73,7 +87,7 @@ app.post("/app/todos", async (req, res) => {
 
 app.delete("/app", async (req, res) => {
   try {
-		console.log("id : ", req.body.id);
+		// console.log("id : ", req.body.id);
 		const deletedTasks = await prisma.task.deleteMany({
 			where: { todoId: req.body.id },
 		});
