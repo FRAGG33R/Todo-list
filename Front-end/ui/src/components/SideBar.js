@@ -1,6 +1,6 @@
 import App from "./App";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IconPlus, IconX } from "@tabler/icons-react";
 import axios from "axios";
 import Modal from "./Modal";
@@ -30,7 +30,6 @@ function SideBar() {
   const [open, setOpen] = useState(false);
   const [displayedTasks, setDisplayedTasks] = useState(0);
   const [tasks, setTasks] = useState([]);
-
   const [modal, setModal] = useState({
     title: "Create To-do list",
     description: "Create To-do list",
@@ -63,7 +62,6 @@ function SideBar() {
       fetching();
     }
   }, [isAuthenticated]);
-
   function createToDo(tempName, id) {
     if (tempName) {
       setToDos((prev) => [...prev, { name: tempName, id: id }]);
