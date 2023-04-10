@@ -37,6 +37,7 @@ export default function App(props) {
         color: "#fff",
       },
     });
+
   const fetchTasks = async () => {
     await axios
       .get("http://localhost:3001/app/list", { params: { id: props.id } })
@@ -47,9 +48,17 @@ export default function App(props) {
         console.log("crash");
       });
   };
+
   useEffect(() => {
     fetchTasks();
   }, [props.id]);
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/app/checkedTask").then((res) => {
+      setCheckedTask(res.data);
+
+    });
+  }, []);
 
   const changeForm = (event) => {
     setError(false);
@@ -83,15 +92,14 @@ export default function App(props) {
       })
       .then((res) => {
         props.setTasks(res.data);
-		const index = checkedTask?.indexOf(id);
-		if (index !== -1)
-		{
-			const newCheckedTask = [
-			...checkedTask.slice(0, index),
-			...checkedTask.slice(index + 1),
-			];
-			setCheckedTask(newCheckedTask);
-		}
+        const index = checkedTask?.indexOf(id);
+        if (index !== -1) {
+          const newCheckedTask = [
+            ...checkedTask.slice(0, index),
+            ...checkedTask.slice(index + 1),
+          ];
+          setCheckedTask(newCheckedTask);
+        }
       })
       .catch(() => {
         console.log("Crash");
@@ -99,19 +107,25 @@ export default function App(props) {
   };
   const checkTask = (id) => {
     const index = checkedTask?.indexOf(id);
-    if (index !== -1)
-	{
+    if (index !== -1) {
       const newCheckedTask = [
         ...checkedTask.slice(0, index),
         ...checkedTask.slice(index + 1),
       ];
       setCheckedTask(newCheckedTask);
-    }
-	else
-	{
+    } else {
       const newCheckedTask = [...checkedTask, id];
       setCheckedTask(newCheckedTask);
     }
+    // console.log(checkedTask)
+    axios
+      .post("http://localhost:3001/app/checkedTask", {
+        checkedTask: checkedTask,
+      })
+      .then((res) => {})
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <>

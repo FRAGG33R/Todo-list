@@ -11,8 +11,19 @@ var corsOptions = {
   origin: "*",
   optionsSuccessStatus: 200,
 };
+var checkedTask = [];
 
 app.use(cors(corsOptions));
+
+app.get("/app/checkedTask", (req, res) => {
+	res.status(200).send(checkedTask);
+})
+
+app.post("/app/checkedTask", (req, res) => {
+	checkedTask = req.body.checkedTask;
+	console.log(checkedTask);
+	res.status(200).send("successfuly data set");
+})
 
 app.delete("/app/list",  async (req, res) => {
 	const Id = req.body.id;
