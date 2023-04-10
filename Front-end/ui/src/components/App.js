@@ -7,12 +7,12 @@ import {
 } from "@tabler/icons-react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
-import { Reorder } from "framer-motion"
-
+import { Reorder } from "framer-motion";
 
 export default function App(props) {
   const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState(false);
+  const [checkedTask, setCheckedTask] = useState([]);
 
   const success = () =>
     toast("One more thing to do!", {
@@ -83,13 +83,27 @@ export default function App(props) {
         },
       })
       .then((res) => {
-		props.setTasks(res.data);
+        props.setTasks(res.data);
       })
       .catch(() => {
         console.log("Crash");
       });
   };
-
+  const checkTask = (id) => 
+  {
+	console.log(id)
+	const index = checkedTask.indexOf(id);
+	if (index !== -1)
+	{
+		const newCheckedTask = [...checkedTask.slice(0, index), ...checkedTask.slice(index + 1)]
+		setCheckedTask(newCheckedTask);
+	}
+	else
+	{
+		const newCheckedTask = [...checkedTask, id];
+		setCheckedTask(newCheckedTask);
+	}
+  }
   return (
     <>
       {props.Open && (
@@ -98,14 +112,28 @@ export default function App(props) {
       <div className="w-screen h-screen flex flex-col items-center xs:space-y-6 md:space-y-16 justify-end bg-[#85ceb9] font-rubik font-normal tracking-widest">
         <Toaster />
         <div className="xs:w-10/12 md:w-7/12 h-[80vh]  overflow-x-hidden overflow-y-scroll scrollbar-thin scrollbar-thumb-[#16433a] scrollbar-track-[#1d5d51] scrollbar-thumb-rounded-full scrollbar-track-rounded-full ">
-		  <Reorder.Group axis="y" values={props.tasks} onReorder={props.setTasks} className="space-y-4 h-full w-full flex justify-start flex-col">
-			{props.tasks.map((item) => (
-				<Reorder.Item key={item.id} value={item} className="w-11/12 " initial={{ opacity: 0 }}
-				animate={{ opacity: 1}}
-				exit={{ opacity: 0 }}>
-				<div className="bg-[#16433a] text-white w-full flex flex-col rounded-xl shadow-lg p-4 hover:bg-[#10362f]">
+          <Reorder.Group
+            axis="y"
+            values={props.tasks}
+            onReorder={props.setTasks}
+            className="space-y-4 h-full w-full flex justify-start flex-col"
+          >
+            {props.tasks.map((item) => (
+              <Reorder.Item
+                key={item.id}
+                value={item}
+                className="w-11/12 "
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                <div className="bg-[#16433a] text-white w-full flex flex-col rounded-xl shadow-lg p-4 hover:bg-[#10362f]">
                   <div className="flex items-center justify-between w-full">
-                    <IconCircle size={22} />
+					<div onClick={() => {
+						checkTask(item.id)
+                    }}>
+						{checkedTask.includes(item.id) ? <IconCircleCheckFilled size={22} /> : <IconCircle size={22} />}
+					</div>
                     <div className="flex items-center space-x-4 lg:w-10/12 xs:w-8/12 overflow-hidden">
                       <div className="text-md w-full">{item.content}</div>
                     </div>
@@ -117,15 +145,16 @@ export default function App(props) {
                         onClick={() => {
                           removeTask(item.id);
                         }}
-                        className="flex items-center justify-center text-white cursor-pointer">
+                        className="flex items-center justify-center text-white cursor-pointer"
+                      >
                         <IconTrash size={20} />
                       </button>
                     </div>
                   </div>
                 </div>
-				</Reorder.Item>
-			))}
-		</Reorder.Group>
+              </Reorder.Item>
+            ))}
+          </Reorder.Group>
         </div>
         <div className="w-full  flex justify-center pb-6 ">
           <form className="relative xs:w-11/12 md:w-7/12" onSubmit={submitForm}>

@@ -73,6 +73,7 @@ function SideBar() {
       });
     }
   }
+
   return (
     <div className="overflow-x-hidden">
       <div className="h-screen flex flex-row bg-[#85ceb9] font-rubik tracking-wider">
@@ -101,7 +102,7 @@ function SideBar() {
           </button>
         )}
         {open && (
-          <div className="fixed  z-40 flex flex-col w-64  h-full space-y-4 overflow-scroll overflow-x-hidden scrollbar-thin scrollbar-thumb-[#16433a] scrollbar-track-[#1d5d51] overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full drop-shadow-2xl bg-[#1c5d51] rounded-br-xl rounded-tr-xl">
+          <div  className=" fixed  z-40 flex flex-col w-64  h-full space-y-4 overflow-scroll overflow-x-hidden scrollbar-thin scrollbar-thumb-[#16433a] scrollbar-track-[#1d5d51] overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full drop-shadow-2xl bg-[#1c5d51] rounded-br-xl rounded-tr-xl">
             <div className="w-full flex items-center justify-between flex-row px-2 pt-2">
               <img
                 className="w-10 h-10 rounded-full border-2 border-white"
