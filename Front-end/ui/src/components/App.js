@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   IconPlus,
   IconTrash,
@@ -75,7 +75,6 @@ export default function App(props) {
   };
 
   const removeTask = (id) => {
-    console.log("id: ", id);
     axios
       .delete("http://localhost:3001/app/list", {
         data: {
@@ -84,21 +83,32 @@ export default function App(props) {
       })
       .then((res) => {
         props.setTasks(res.data);
+		const index = checkedTask?.indexOf(id);
+		if (index !== -1)
+		{
+			const newCheckedTask = [
+			...checkedTask.slice(0, index),
+			...checkedTask.slice(index + 1),
+			];
+			setCheckedTask(newCheckedTask);
+		}
       })
       .catch(() => {
         console.log("Crash");
       });
   };
   const checkTask = (id) => {
-    console.log(id);
-    const index = checkedTask.indexOf(id);
-    if (index !== -1) {
+    const index = checkedTask?.indexOf(id);
+    if (index !== -1)
+	{
       const newCheckedTask = [
         ...checkedTask.slice(0, index),
         ...checkedTask.slice(index + 1),
       ];
       setCheckedTask(newCheckedTask);
-    } else {
+    }
+	else
+	{
       const newCheckedTask = [...checkedTask, id];
       setCheckedTask(newCheckedTask);
     }
@@ -121,13 +131,12 @@ export default function App(props) {
               <Reorder.Item
                 key={item.id}
                 value={item}
-                className="w-11/12 "
+                className="w-11/12"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               >
-                {/* <div className="border-b-2 w-full border-white"></div> */}
-                {checkedTask.includes(item.id) ? (
+                {checkedTask?.includes(item.id) ? (
                   <div className="bg-[#0a2620] text-white w-full flex flex-col rounded-xl shadow-lg p-4 hover:bg-[#051613] opacity-60">
                     <div className="flex items-center justify-between w-full">
                       <div
@@ -135,12 +144,12 @@ export default function App(props) {
                           checkTask(item.id);
                         }}
                       >
-                          <IconCircleCheckFilled size={22} />
+                        <IconCircleCheckFilled size={22} />
                       </div>
                       <div className="flex space-x-4 lg:w-10/12 xs:w-8/12 overflow-hidden h-[3vh] ">
-					  <div className="text-md w-full overflow-hidden  decoration-gray-200 line-through opacity-90">
-						{item.content}
-						</div>
+                        <div className="text-md w-full overflow-hidden  decoration-gray-200 line-through opacity-90">
+                          {item.content}
+                        </div>
                       </div>
                       <div className="flex items-center justify-end space-x-2">
                         <div className="cursor-pointer">
@@ -168,7 +177,7 @@ export default function App(props) {
                           checkTask(item.id);
                         }}
                       >
-                        {checkedTask.includes(item.id) ? (
+                        {checkedTask?.includes(item.id) ? (
                           <IconCircleCheckFilled size={22} />
                         ) : (
                           <IconCircle size={22} />
