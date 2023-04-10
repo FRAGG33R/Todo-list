@@ -89,21 +89,20 @@ export default function App(props) {
         console.log("Crash");
       });
   };
-  const checkTask = (id) => 
-  {
-	console.log(id)
-	const index = checkedTask.indexOf(id);
-	if (index !== -1)
-	{
-		const newCheckedTask = [...checkedTask.slice(0, index), ...checkedTask.slice(index + 1)]
-		setCheckedTask(newCheckedTask);
-	}
-	else
-	{
-		const newCheckedTask = [...checkedTask, id];
-		setCheckedTask(newCheckedTask);
-	}
-  }
+  const checkTask = (id) => {
+    console.log(id);
+    const index = checkedTask.indexOf(id);
+    if (index !== -1) {
+      const newCheckedTask = [
+        ...checkedTask.slice(0, index),
+        ...checkedTask.slice(index + 1),
+      ];
+      setCheckedTask(newCheckedTask);
+    } else {
+      const newCheckedTask = [...checkedTask, id];
+      setCheckedTask(newCheckedTask);
+    }
+  };
   return (
     <>
       {props.Open && (
@@ -127,31 +126,76 @@ export default function App(props) {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               >
-                <div className="bg-[#16433a] text-white w-full flex flex-col rounded-xl shadow-lg p-4 hover:bg-[#10362f]">
-                  <div className="flex items-center justify-between w-full">
-					<div onClick={() => {
-						checkTask(item.id)
-                    }}>
-						{checkedTask.includes(item.id) ? <IconCircleCheckFilled size={22} /> : <IconCircle size={22} />}
-					</div>
-                    <div className="flex items-center space-x-4 lg:w-10/12 xs:w-8/12 overflow-hidden">
-                      <div className="text-md w-full">{item.content}</div>
-                    </div>
-                    <div className="flex items-center justify-end space-x-2">
-                      <div className="cursor-pointer">
-                        <img className="w-5 h-5 rounded-lg" src={props.image} />
-                      </div>
-                      <button
+                {/* <div className="border-b-2 w-full border-white"></div> */}
+                {checkedTask.includes(item.id) ? (
+                  <div className="bg-[#0a2620] text-white w-full flex flex-col rounded-xl shadow-lg p-4 hover:bg-[#051613] opacity-60">
+                    <div className="flex items-center justify-between w-full">
+                      <div
                         onClick={() => {
-                          removeTask(item.id);
+                          checkTask(item.id);
                         }}
-                        className="flex items-center justify-center text-white cursor-pointer"
                       >
-                        <IconTrash size={20} />
-                      </button>
+                          <IconCircleCheckFilled size={22} />
+                      </div>
+                      <div className="flex space-x-4 lg:w-10/12 xs:w-8/12 overflow-hidden h-[3vh] ">
+					  <div className="text-md w-full overflow-hidden  decoration-gray-200 line-through opacity-90">
+						{item.content}
+						</div>
+                      </div>
+                      <div className="flex items-center justify-end space-x-2">
+                        <div className="cursor-pointer">
+                          <img
+                            className="w-5 h-5 rounded-lg"
+                            src={props.image}
+                          />
+                        </div>
+                        <button
+                          onClick={() => {
+                            removeTask(item.id);
+                          }}
+                          className="flex items-center justify-center text-white cursor-pointer"
+                        >
+                          <IconTrash size={20} />
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
+                ) : (
+                  <div className="bg-[#16433a] text-white w-full flex flex-col rounded-xl shadow-lg p-4 hover:bg-[#10362f]">
+                    <div className="flex items-center justify-between w-full">
+                      <div
+                        onClick={() => {
+                          checkTask(item.id);
+                        }}
+                      >
+                        {checkedTask.includes(item.id) ? (
+                          <IconCircleCheckFilled size={22} />
+                        ) : (
+                          <IconCircle size={22} />
+                        )}
+                      </div>
+                      <div className="flex items-center space-x-4 lg:w-10/12 xs:w-8/12 overflow-hidden">
+                        <div className="text-md w-full">{item.content}</div>
+                      </div>
+                      <div className="flex items-center justify-end space-x-2">
+                        <div className="cursor-pointer">
+                          <img
+                            className="w-5 h-5 rounded-lg"
+                            src={props.image}
+                          />
+                        </div>
+                        <button
+                          onClick={() => {
+                            removeTask(item.id);
+                          }}
+                          className="flex items-center justify-center text-white cursor-pointer"
+                        >
+                          <IconTrash size={20} />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </Reorder.Item>
             ))}
           </Reorder.Group>
