@@ -21,7 +21,6 @@ app.get("/app/checkedTask", (req, res) => {
 
 app.post("/app/checkedTask", (req, res) => {
 	checkedTask = req.body.checkedTask;
-	console.log(checkedTask);
 	res.status(200).send("successfuly data set");
 })
 

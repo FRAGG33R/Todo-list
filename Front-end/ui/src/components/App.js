@@ -42,6 +42,13 @@ export default function App(props) {
     await axios
       .get("http://localhost:3001/app/list", { params: { id: props.id } })
       .then(function (res) {
+		const newArray = res.data;
+		// let index = 0
+		// for (; index < props.tasks.length; index++)
+		// {
+		// 	console.log(`newArray : [${newArray[index].id}] | oldArray : [${props.tasks[index].id}]`);
+		// }
+		// console.log("The deference is : " , index);
         props.setTasks(res.data);
       })
       .catch(function () {
@@ -56,7 +63,6 @@ export default function App(props) {
   useEffect(() => {
     axios.get("http://localhost:3001/app/checkedTask").then((res) => {
       setCheckedTask(res.data);
-
     });
   }, []);
 
@@ -112,20 +118,28 @@ export default function App(props) {
         ...checkedTask.slice(0, index),
         ...checkedTask.slice(index + 1),
       ];
-      setCheckedTask(newCheckedTask);
-    } else {
-      const newCheckedTask = [...checkedTask, id];
+	  axios
+      .post("http://localhost:3001/app/checkedTask", {
+        checkedTask: newCheckedTask,
+      })
+      .then(() => {})
+      .catch((err) => {
+        console.log(err);
+      });
       setCheckedTask(newCheckedTask);
     }
-    // console.log(checkedTask)
-    axios
+	else {
+      const newCheckedTask = [...checkedTask, id];
+	  axios
       .post("http://localhost:3001/app/checkedTask", {
-        checkedTask: checkedTask,
+        checkedTask: newCheckedTask,
       })
       .then((res) => {})
       .catch((err) => {
         console.log(err);
       });
+      setCheckedTask(newCheckedTask);
+    }    
   };
   return (
     <>
