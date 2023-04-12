@@ -42,7 +42,7 @@ export default function App(props) {
     await axios
       .get("http://localhost:3001/app/list", { params: { id: props.id } })
       .then(function (res) {
-		const newArray = res.data;
+		// const newArray = res.data;
 		// let index = 0
 		// for (; index < props.tasks.length; index++)
 		// {
@@ -79,7 +79,9 @@ export default function App(props) {
         if (res.status === 200) {
           setError(false);
           success();
-          fetchTasks();
+		  props.setTasks([...props.tasks, res.data])
+		//   console.log(res.data);
+        //   fetchTasks();
         }
       })
       .catch(function () {

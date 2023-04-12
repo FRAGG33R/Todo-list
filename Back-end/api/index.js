@@ -49,7 +49,7 @@ app.post("/app/list", async (req, res) => {
           todo: { connect: { id: parseInt(todoId) } },
         },
       });
-      res.status(200).send("successfully");
+      res.status(200).send(task);
     } catch (error) {
       res.status(400).send("failed");
     }
