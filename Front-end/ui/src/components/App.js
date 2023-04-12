@@ -42,13 +42,6 @@ export default function App(props) {
     await axios
       .get("http://localhost:3001/app/list", { params: { id: props.id } })
       .then(function (res) {
-		// const newArray = res.data;
-		// let index = 0
-		// for (; index < props.tasks.length; index++)
-		// {
-		// 	console.log(`newArray : [${newArray[index].id}] | oldArray : [${props.tasks[index].id}]`);
-		// }
-		// console.log("The deference is : " , index);
         props.setTasks(res.data);
       })
       .catch(function () {
@@ -192,7 +185,7 @@ export default function App(props) {
                           onClick={() => {
                             removeTask(item.id);
                           }}
-                          className="flex items-center justify-center text-white cursor-pointer"
+                          className="flex items-center justify-center text-white hover:text-black cursor-pointer"
                         >
                           <IconTrash size={20} />
                         </button>
