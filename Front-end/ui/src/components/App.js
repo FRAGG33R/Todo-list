@@ -72,9 +72,9 @@ export default function App(props) {
         if (res.status === 200) {
           setError(false);
           success();
-		  props.setTasks([...props.tasks, res.data])
-		//   console.log(res.data);
-        //   fetchTasks();
+          props.setTasks([...props.tasks, res.data]);
+          //   console.log(res.data);
+          //   fetchTasks();
         }
       })
       .catch(function () {
@@ -113,28 +113,27 @@ export default function App(props) {
         ...checkedTask.slice(0, index),
         ...checkedTask.slice(index + 1),
       ];
-	  axios
-      .post("http://localhost:3001/app/checkedTask", {
-        checkedTask: newCheckedTask,
-      })
-      .then(() => {})
-      .catch((err) => {
-        console.log(err);
-      });
+      axios
+        .post("http://localhost:3001/app/checkedTask", {
+          checkedTask: newCheckedTask,
+        })
+        .then(() => {})
+        .catch((err) => {
+          console.log(err);
+        });
+      setCheckedTask(newCheckedTask);
+    } else {
+      const newCheckedTask = [...checkedTask, id];
+      axios
+        .post("http://localhost:3001/app/checkedTask", {
+          checkedTask: newCheckedTask,
+        })
+        .then((res) => {})
+        .catch((err) => {
+          console.log(err);
+        });
       setCheckedTask(newCheckedTask);
     }
-	else {
-      const newCheckedTask = [...checkedTask, id];
-	  axios
-      .post("http://localhost:3001/app/checkedTask", {
-        checkedTask: newCheckedTask,
-      })
-      .then((res) => {})
-      .catch((err) => {
-        console.log(err);
-      });
-      setCheckedTask(newCheckedTask);
-    }    
   };
   return (
     <>
@@ -143,95 +142,106 @@ export default function App(props) {
       )}
       <div className="w-screen h-screen flex flex-col items-center xs:space-y-6 md:space-y-16 justify-end bg-[#85ceb9] font-rubik font-normal tracking-widest">
         <Toaster />
-        <div className="xs:w-10/12 md:w-7/12 h-[80vh]  overflow-x-hidden overflow-y-scroll scrollbar-thin scrollbar-thumb-[#16433a] scrollbar-track-[#1d5d51] scrollbar-thumb-rounded-full scrollbar-track-rounded-full ">
-          <Reorder.Group
-            axis="y"
-            values={props.tasks}
-            onReorder={props.setTasks}
-            className="space-y-4 h-full w-full flex justify-start flex-col"
-          >
-            {props.tasks.map((item) => (
-              <Reorder.Item
-                key={item.id}
-                value={item}
-                className="w-11/12"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              >
-                {checkedTask?.includes(item.id) ? (
-                  <div className="bg-[#0a2620] text-white w-full flex flex-col rounded-xl shadow-lg p-4 hover:bg-[#051613] opacity-60">
-                    <div className="flex items-center justify-between w-full">
-                      <div
-                        onClick={() => {
-                          checkTask(item.id);
-                        }}
-                      >
-                        <IconCircleCheckFilled size={22} />
-                      </div>
-                      <div className="flex space-x-4 lg:w-10/12 xs:w-8/12 overflow-hidden h-[3vh] ">
-                        <div className="text-md w-full overflow-hidden  decoration-gray-200 line-through opacity-90">
-                          {item.content}
-                        </div>
-                      </div>
-                      <div className="flex items-center justify-end space-x-2">
-                        <div className="cursor-pointer">
-                          <img
-                            className="w-5 h-5 rounded-lg"
-                            src={props.image}
-                          />
-                        </div>
-                        <button
+        {props.tasks.length > 0 ? (
+          <div className="xs:w-10/12 md:w-7/12 h-[80vh]  overflow-x-hidden overflow-y-scroll scrollbar-thin scrollbar-thumb-[#16433a] scrollbar-track-[#1d5d51] scrollbar-thumb-rounded-full scrollbar-track-rounded-full ">
+            <Reorder.Group
+              axis="y"
+              values={props.tasks}
+              onReorder={props.setTasks}
+              className="space-y-4 h-full w-full flex justify-start flex-col"
+            >
+              {props.tasks.map((item) => (
+                <Reorder.Item
+                  key={item.id}
+                  value={item}
+                  className="w-11/12"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  {checkedTask?.includes(item.id) ? (
+                    <div className="bg-[#0a2620] text-white w-full flex flex-col rounded-xl shadow-lg p-4 hover:bg-[#051613] opacity-60">
+                      <div className="flex items-center justify-between w-full">
+                        <div
                           onClick={() => {
-                            removeTask(item.id);
+                            checkTask(item.id);
                           }}
-                          className="flex items-center justify-center text-white hover:text-black cursor-pointer"
                         >
-                          <IconTrash size={20} />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="bg-[#16433a] text-white w-full flex flex-col rounded-xl shadow-lg p-4 hover:bg-[#10362f]">
-                    <div className="flex items-center justify-between w-full">
-                      <div
-                        onClick={() => {
-                          checkTask(item.id);
-                        }}
-                      >
-                        {checkedTask?.includes(item.id) ? (
                           <IconCircleCheckFilled size={22} />
-                        ) : (
-                          <IconCircle size={22} />
-                        )}
-                      </div>
-                      <div className="flex items-center space-x-4 lg:w-10/12 xs:w-8/12 overflow-hidden">
-                        <div className="text-md w-full">{item.content}</div>
-                      </div>
-                      <div className="flex items-center justify-end space-x-2">
-                        <div className="cursor-pointer">
-                          <img
-                            className="w-5 h-5 rounded-lg"
-                            src={props.image}
-                          />
                         </div>
-                        <button
-                          onClick={() => {
-                            removeTask(item.id);
-                          }}
-                          className="flex items-center justify-center text-white cursor-pointer"
-                        >
-                          <IconTrash size={20} />
-                        </button>
+                        <div className="flex space-x-4 lg:w-10/12 xs:w-8/12 overflow-hidden h-[3vh] ">
+                          <div className="text-md w-full overflow-hidden  decoration-gray-200 line-through opacity-90">
+                            {item.content}
+                          </div>
+                        </div>
+                        <div className="flex items-center justify-end space-x-2">
+                          <div className="cursor-pointer">
+                            <img
+                              className="w-5 h-5 rounded-lg"
+                              src={props.image}
+                            />
+                          </div>
+                          <button
+                            onClick={() => {
+                              removeTask(item.id);
+                            }}
+                            className="flex items-center justify-center text-white hover:text-black cursor-pointer"
+                          >
+                            <IconTrash size={20} />
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                )}
-              </Reorder.Item>
-            ))}
-          </Reorder.Group>
-        </div>
+                  ) : (
+                    <div className="bg-[#16433a] text-white w-full flex flex-col rounded-xl shadow-lg p-4 hover:bg-[#10362f]">
+                      <div className="flex items-center justify-between w-full">
+                        <div
+                          onClick={() => {
+                            checkTask(item.id);
+                          }}
+                        >
+                          {checkedTask?.includes(item.id) ? (
+                            <IconCircleCheckFilled size={22} />
+                          ) : (
+                            <IconCircle size={22} />
+                          )}
+                        </div>
+                        <div className="flex items-center space-x-4 lg:w-10/12 xs:w-8/12 overflow-hidden">
+                          <div className="text-md w-full">{item.content}</div>
+                        </div>
+                        <div className="flex items-center justify-end space-x-2">
+                          <div className="cursor-pointer">
+                            <img
+                              className="w-5 h-5 rounded-lg"
+                              src={props.image}
+                            />
+                          </div>
+                          <button
+                            onClick={() => {
+                              removeTask(item.id);
+                            }}
+                            className="flex items-center justify-center text-white cursor-pointer"
+                          >
+                            <IconTrash size={20} />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </Reorder.Item>
+              ))}
+            </Reorder.Group>
+          </div>
+        ) : (
+          <div className="w-full h-full flex items-center justify-center flex-col space-y-6 text-center ">
+            <div className="font-rubik font-bold xs:text-5xl md:text-7xl text-black md:w-10/12 xs:w-full">
+              Organize your work and life, finally.
+            </div>
+            <div className="font-rubik xs:text-2xl md:text-3xl font-light text-gray-800">
+			Remove doubts with <span className="font-bold text-[#0f3931] drop-shadow-lg shadow-black">action</span>
+            </div>
+          </div>
+        )}
         <div className="w-full  flex justify-center pb-6 ">
           <form className="relative xs:w-11/12 md:w-7/12" onSubmit={submitForm}>
             <input
