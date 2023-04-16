@@ -55,6 +55,8 @@ function SideBar() {
       })
       .then(function (res) {
         setToDos(res.data);
+		if(toDos.length === 0)
+			setOpen(true);
       })
       .catch(function () {
         console.log("Network error");
@@ -65,6 +67,7 @@ function SideBar() {
       fetching();
     }
   }, [isAuthenticated]);
+
   function createToDo(tempName, id) {
     if (tempName) {
       setToDos((prev) => [...prev, { name: tempName, id: id }]);
@@ -105,7 +108,7 @@ function SideBar() {
           </button>
         )}
         {open && (
-          <div className=" fixed z-40 flex flex-col w-64  h-full  overflow-scroll overflow-x-hidden scrollbar-thin scrollbar-thumb-[#16433a] scrollbar-track-[#1d5d51] overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full drop-shadow-2xl bg-[#1c5d51] rounded-br-xl rounded-tr-xl">
+          <div className=" fixed z-40 flex flex-col w-64  h-full  overflow-scroll overflow-x-hidden scrollbar-thin scrollbar-thumb-[#16433a] scrollbar-track-[#1d5d51] overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full  bg-[#1c5d51] rounded-br-xl rounded-tr-xl">
             <div className="w-full flex items-center justify-between flex-row px-2 pt-1 ">
               <div className="mb-1 w-10 h-10">
                 <button

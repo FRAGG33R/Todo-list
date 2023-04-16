@@ -73,8 +73,6 @@ export default function App(props) {
           setError(false);
           success();
           props.setTasks([...props.tasks, res.data]);
-          //   console.log(res.data);
-          //   fetchTasks();
         }
       })
       .catch(function () {
@@ -238,7 +236,7 @@ export default function App(props) {
               Organize your work and life, finally.
             </div>
             <div className="font-rubik xs:text-2xl md:text-3xl font-light text-gray-800">
-			Remove doubts with <span className="font-bold text-[#0f3931] drop-shadow-lg shadow-black">action</span>
+				Remove doubts with <span className="font-bold text-[#0f3931] drop-shadow-lg shadow-black">action</span>
             </div>
           </div>
         )}
