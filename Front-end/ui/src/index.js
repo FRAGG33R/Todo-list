@@ -24,7 +24,6 @@ root.render(
 		<Route exact path="/" element={<LandingPage />}></Route>
 		<Route path="/app" element={<SideBar />}></Route>
 		<Route path="*" element={<PageNotFound />}></Route>
-			{/* <Route path="/" element={<App />}></Route> */}
 		</Routes>
 	</BrowserRouter>
 	</Auth0Provider>

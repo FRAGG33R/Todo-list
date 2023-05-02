@@ -167,8 +167,8 @@ export default function App(props) {
                         >
                           <IconCircleCheckFilled size={22} />
                         </div>
-                        <div className="flex space-x-4 lg:w-10/12 xs:w-8/12 overflow-hidden h-[3vh] ">
-                          <div className="text-md w-full overflow-hidden  decoration-gray-200 line-through opacity-90">
+                        <div className="flex space-x-4 lg:w-10/12 xs:w-8/12 overflow-hidden ">
+                          <div className="text-md w-full overflow-hidden decoration-gray-200 line-through opacity-90">
                             {item.content}
                           </div>
                         </div>

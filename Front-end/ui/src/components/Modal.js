@@ -30,7 +30,7 @@ export default function Example(props) {
     <Transition.Root show={open} as={Fragment}>
       <Dialog
         as="div"
-        className="relative z-10"
+        className="relative z-50"
         initialFocus={cancelButtonRef}
         onClose={setOpen}
       >
@@ -90,7 +90,7 @@ export default function Example(props) {
                     </div>
                     <button
                       type="submit"
-                      className="self-end mb-3 mr-3 inline-flex w-full justify-center rounded-full border border-transparent bg-[#1c5d51] px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-[#147157] focus:outline-none focus:ring-2 focus:ring-[#1c5d51] focus:ring-offset-2  sm:w-auto sm:text-sm"
+                      className="self-end mb-3 mr-3 inline-flex w-1/2 justify-center rounded-full border border-transparent bg-[#1c5d51] px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-[#147157] focus:outline-none focus:ring-2 focus:ring-[#1c5d51] focus:ring-offset-2  sm:w-auto sm:text-sm"
                       onClick={() => {
                         setOpen(false);
                       }}
